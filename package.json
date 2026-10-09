@@ -1,0 +1,15 @@
+{
+  "name": "rode-audio-podcast-suite",
+  "version": "2026.1.0",
+  "description": "RØDE International Pro Audio, Microphones & Studio Automation Suite",
+  "scripts": {
+    "dev": "vite --port 3000 --open",
+    "serve": "npx serve -l 3000 ."
+  },
+  "keywords": ["rode", "audio", "podcasting", "microphones", "studio", "ecommerce"],
+  "author": "RØDE Engineering Sydney",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

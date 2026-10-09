@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RØDE International | Professional Audio, Microphones & Studio Automation</title>
+  <meta name="description" content="Precision audio gear for podcasters, musicians, streamers, and broadcast creators. Flagship microphones, audio interfaces, podcast studios, and smart studio tools.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Chart.js for Admin Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="bg-dark text-slate-100 antialiased selection:bg-gold-500 selection:text-black">
+  
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="badge-gold"><i class="fa-solid fa-certificate"></i> 10-YEAR WARRANTY</span>
+        <span class="top-bar-text">Free Global Express Shipping on Pro Studio Kits over $150</span>
+      </div>
+      <div class="top-bar-right">
+        <!-- Quick Demo Switcher -->
+        <div class="demo-role-pill">
+          <span class="text-xs text-slate-400">Viewing as:</span>
+          <button id="role-switch-btn" class="role-btn" title="Click to cycle role (Guest / Customer / Admin)">
+            <span id="current-role-badge" class="badge-role customer"><i class="fa-solid fa-user-check"></i> Creator (Alex Vance)</span>
+          </button>
+        </div>
+        <div class="top-currency">
+          <select id="currency-select" class="currency-dropdown">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="AUD">AUD ($)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header" id="main-header">
+    <div class="container header-container">
+      <!-- Logo -->
+      <a href="#home" class="brand-logo" data-nav="home">
+        <div class="logo-symbol">
+          <span class="logo-letter">R</span>
+          <span class="logo-circle-gold"></span>
+        </div>
+        <div class="logo-text-group">
+          <span class="brand-name">RØDE</span>
+          <span class="brand-sub">STUDIO SUITE</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active" data-nav="home"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+          <li><a href="#shop" class="nav-link" data-nav="shop"><i class="fa-solid fa-microphone-lines"></i> Shop & Gear</a></li>
+          <li><a href="#guides" class="nav-link" data-nav="guides"><i class="fa-solid fa-sliders"></i> Audio Guides & Studio Shootout</a></li>
+          <li><a href="#compare" class="nav-link" data-nav="compare"><i class="fa-solid fa-code-compare"></i> Compare <span id="compare-badge" class="count-badge hidden">0</span></a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- Live Audio Synth/Visualizer Trigger -->
+        <button id="global-audio-toggle" class="audio-pulse-btn" title="Toggle Interactive Audio Studio Visualizer">
+          <span class="audio-bars">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+            <span class="bar bar-4"></span>
+          </span>
+          <span class="audio-label">Studio Monitor</span>
+        </button>
+
+        <!-- Search Bar Trigger -->
+        <div class="search-box-wrap">
+          <button id="search-trigger-btn" class="header-icon-btn" title="Quick Search Gear">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+
+        <!-- Wishlist -->
+        <button id="wishlist-btn" class="header-icon-btn" title="My Wishlist" data-nav="customer-wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span id="wishlist-badge" class="counter-bubble hidden">0</span>
+        </button>
+
+        <!-- Cart Drawer Button -->
+        <button id="cart-drawer-btn" class="cart-btn" title="View Shopping Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-label">Cart</span>
+          <span id="cart-badge" class="cart-counter">0</span>
+        </button>
+
+        <!-- User Profile / Auth Button -->
+        <div class="user-menu-wrap" id="user-menu-container">
+          <button id="user-account-btn" class="user-btn" title="User Account">
+            <div class="user-avatar" id="header-user-avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <span id="header-user-name" class="user-name">Account</span>
+            <i class="fa-solid fa-chevron-down user-caret"></i>
+          </button>
+          
+          <!-- User Dropdown Menu -->
+          <div class="user-dropdown hidden" id="user-dropdown-menu">
+            <div class="dropdown-header">
+              <p class="dropdown-user-name" id="menu-user-name">Alex Vance</p>
+              <p class="dropdown-user-email" id="menu-user-email">alex.vance@studio.audio</p>
+              <span class="badge-gold text-xs" id="menu-user-role">PRO CREATOR</span>
+            </div>
+            <ul class="dropdown-links">
+              <li><a href="#customer-orders" class="dropdown-item" data-nav="customer-orders"><i class="fa-solid fa-box"></i> My Orders</a></li>
+              <li><a href="#customer-warranty" class="dropdown-item" data-nav="customer-warranty"><i class="fa-solid fa-shield-halved"></i> Warranty Registration</a></li>
+              <li><a href="#customer-wishlist" class="dropdown-item" data-nav="customer-wishlist"><i class="fa-solid fa-heart"></i> Saved Wishlist</a></li>
+              <li><a href="#customer-invoices" class="dropdown-item" data-nav="customer-invoices"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Receipts</a></li>
+              <li><a href="#customer-settings" class="dropdown-item" data-nav="customer-settings"><i class="fa-solid fa-gear"></i> Account Settings</a></li>
+              <li class="admin-divider admin-only-item"><hr></li>
+              <li class="admin-only-item"><a href="#admin-dashboard" class="dropdown-item admin-link" data-nav="admin-dashboard"><i class="fa-solid fa-chart-line text-gold"></i> Admin Management Console</a></li>
+              <li><hr></li>
+              <li><button id="logout-btn" class="dropdown-item text-red-400"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Quick Search Overlay Modal -->
+  <div id="search-modal" class="modal-overlay hidden">
+    <div class="search-modal-card">
+      <div class="search-input-header">
+        <i class="fa-solid fa-magnifying-glass text-gold search-input-icon"></i>
+        <input type="text" id="global-search-input" placeholder="Search microphones, wireless kits, interfaces, NTH-100..." autocomplete="off">
+        <button id="close-search-btn" class="modal-close-icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="search-quick-tags">
+        <span>Popular:</span>
+        <button class="quick-tag" data-tag="NT1">NT1 5th Gen</button>
+        <button class="quick-tag" data-tag="Wireless PRO">Wireless PRO</button>
+        <button class="quick-tag" data-tag="RØDECaster">RØDECaster Pro II</button>
+        <button class="quick-tag" data-tag="Podcasting">Podcasting Kits</button>
+      </div>
+      <div id="search-results-container" class="search-results-grid">
+        <!-- Live dynamic results -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Studio Live Soundboard / Visualizer Drawer -->
+  <aside id="audio-studio-drawer" class="audio-studio-bar collapsed">
+    <div class="studio-bar-inner">
+      <div class="studio-info">
+        <div class="studio-badge"><i class="fa-solid fa-waveform-lines"></i> RØDE ACOUSTIC ENGINE</div>
+        <span id="studio-active-mic" class="studio-mic-name">Active Sound: NT1 5th Gen (Cardioid / Voice Clarity)</span>
+      </div>
+      
+      <!-- Visualizer Canvas -->
+      <div class="visualizer-container">
+        <canvas id="audio-visualizer-canvas" width="280" height="36"></canvas>
+      </div>
+
+      <!-- Controls -->
+      <div class="studio-controls">
+        <button id="play-sample-btn" class="studio-btn play"><i class="fa-solid fa-play"></i> Test Audio Tone</button>
+        <div class="studio-eq-sliders">
+          <label>Gain: <input type="range" id="studio-gain-slider" min="0" max="100" value="75"></label>
+          <label>Filter: 
+            <select id="studio-filter-select" class="studio-select">
+              <option value="flat">Warm Studio (Flat)</option>
+              <option value="clarity">Vocal Clarity Boost</option>
+              <option value="broadcast">Deep Broadcast EQ</option>
+              <option value="denoise">Active De-Noise (APHEX®)</option>
+            </select>
+          </label>
+        </div>
+        <button id="close-studio-drawer" class="studio-close-btn" title="Hide Studio Bar"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================== -->
+  <!-- MAIN APP CONTAINER FOR ALL 5 PAGES & WORKFLOWS -->
+  <!-- ======================================================== -->
+  <main id="app-viewport">
+
+    <!-- ====================================================== -->
+    <!-- PAGE 01: HOME PAGE -->
+    <!-- ====================================================== -->
+    <section id="page-home" class="page-view active">
+      
+      <!-- Hero Banner with 3D Aura & Dynamic Soundwave -->
+      <div class="hero-section">
+        <div class="hero-bg-glow"></div>
+        <div class="container hero-container">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="pulse-dot"></span>
+              <span>THE CHOICE OF TODAY'S CREATIVE GENERATION</span>
+            </div>
+            <h1 class="hero-title">
+              UNCOMPROMISING <br>
+              <span class="gold-gradient-text">STUDIO PRECISION</span>.
+            </h1>
+            <p class="hero-subtitle">
+              From legendary broadcast microphones to all-in-one podcast production consoles and ultra-compact wireless transmitters. Engineered in Sydney, Australia.
+            </p>
+            <div class="hero-cta-group">
+              <a href="#shop" class="btn btn-gold btn-lg" data-nav="shop">
+                <i class="fa-solid fa-bag-shopping"></i> Explore Pro Lineup
+              </a>
+              <a href="#guides" class="btn btn-outline btn-lg" data-nav="guides">
+                <i class="fa-solid fa-headphones"></i> Interactive Mic Shootout
+              </a>
+            </div>
+            
+            <!-- Quick Spec Highlights -->
+            <div class="hero-stats">
+              <div class="hero-stat-item">
+                <span class="stat-number">32-bit</span>
+                <span class="stat-label">Float On-Board Recording</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="stat-number">4dBA</span>
+                <span class="stat-label">Ultra-Low Self Noise</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="stat-number">10 Yr</span>
+                <span class="stat-label">Manufacturer Warranty</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Flagship Product Interactive Card -->
+          <div class="hero-showcase">
+            <div class="flagship-card glassmorphism">
+              <div class="flagship-tag"><i class="fa-solid fa-crown text-gold"></i> FLAGSHIP OF THE YEAR</div>
+              <div class="flagship-image-wrap">
+                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" alt="RØDE NT1 5th Generation" class="flagship-img" id="hero-flagship-img">
+                <div class="sound-ripple"></div>
+              </div>
+              <div class="flagship-info">
+                <div class="flex-between">
+                  <h3 class="flagship-name">NT1 5th Generation</h3>
+                  <span class="flagship-price">$249.00</span>
+                </div>
+                <p class="flagship-desc">Dual Connect XLR & USB-C Large-Diaphragm Studio Condenser with 32-bit Float & Built-in DSP.</p>
+                <div class="flagship-actions">
+                  <button class="btn btn-gold btn-sm quick-add-cart-btn" data-product-id="rode-nt1-5th">
+                    <i class="fa-solid fa-cart-plus"></i> Quick Add
+                  </button>
+                  <button class="btn btn-ghost btn-sm preview-audio-btn" data-mic-sample="nt1">
+                    <i class="fa-solid fa-volume-high"></i> Listen Sample
+                  </button>
+                  <a href="#product-details?id=rode-nt1-5th" class="btn btn-outline btn-sm" data-nav="product-details" data-id="rode-nt1-5th">
+                    360° Specs <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Showcase Section -->
+      <section class="section bg-slate-900/60 border-y border-slate-800">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-badge"><i class="fa-solid fa-layer-group"></i> GEAR ECOSYSTEM</span>
+            <h2 class="section-title">Explore by Creation Discipline</h2>
+            <p class="section-desc">Tailored acoustics and signal chains engineered for your specific creative workflow.</p>
+          </div>
+
+          <div class="categories-grid" id="home-categories-grid">
+            <!-- Dynamic Category Cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Flagship Microphones & Bestsellers -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header flex-between align-end">
+            <div>
+              <span class="section-badge"><i class="fa-solid fa-fire text-gold"></i> PRO GEAR SHOWCASE</span>
+              <h2 class="section-title">Bestsellers & Flagship Audio Tools</h2>
+              <p class="section-desc">Industry-standard microphones, interfaces, and consoles trusted by millions worldwide.</p>
+            </div>
+            <div class="category-tabs" id="bestsellers-category-tabs">
+              <button class="cat-tab-btn active" data-cat="all">All Gear</button>
+              <button class="cat-tab-btn" data-cat="microphones">Microphones</button>
+              <button class="cat-tab-btn" data-cat="consoles">Production Studios</button>
+              <button class="cat-tab-btn" data-cat="wireless">Wireless Systems</button>
+              <button class="cat-tab-btn" data-cat="headphones">Headphones</button>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="products-grid" id="home-bestsellers-grid">
+            <!-- Dynamic Product Cards Injected Here -->
+          </div>
+
+          <div class="text-center mt-12">
+            <a href="#shop" class="btn btn-gold btn-lg" data-nav="shop">
+              <i class="fa-solid fa-grid-2"></i> Browse Complete 2026 Catalog (12+ Gear Systems)
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Podcast Studio Builder & Kit Matcher Banner -->
+      <section class="section studio-banner-section">
+        <div class="container">
+          <div class="studio-banner-card glassmorphism">
+            <div class="studio-banner-text">
+              <span class="badge-gold"><i class="fa-solid fa-wand-magic-sparkles"></i> INTERACTIVE STUDIO MATCHER</span>
+              <h2 class="banner-title">Build Your Dream Recording Rig in 60 Seconds</h2>
+              <p class="banner-desc">Whether you run a solo YouTube stream, a 4-person podcast round-table, or mobile filmmaking rig, get an automated gear manifest and instant kit discount.</p>
+              
+              <div class="kit-selector-chips">
+                <button class="kit-chip active" data-kit="solo-podcast"><i class="fa-solid fa-microphone"></i> Solo Podcaster</button>
+                <button class="kit-chip" data-kit="multi-podcast"><i class="fa-solid fa-users"></i> 4-Host Roundtable</button>
+                <button class="kit-chip" data-kit="streamer"><i class="fa-solid fa-gamepad"></i> Twitch Streamer</button>
+                <button class="kit-chip" data-kit="field-filmmaker"><i class="fa-solid fa-video"></i> Run-&-Gun Video</button>
+              </div>
+
+              <div id="kit-matcher-result" class="kit-result-box">
+                <!-- Injected manifest -->
+              </div>
+            </div>
+
+            <div class="studio-banner-graphic">
+              <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80" alt="Podcast Studio Gear" class="studio-img-rounded">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Creator Testimonials & Global Reviews -->
+      <section class="section bg-slate-900/40">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-badge"><i class="fa-solid fa-star text-gold"></i> TRUSTED BY MASTERS</span>
+            <h2 class="section-title">Powering the World's Leading Creators</h2>
+            <p class="section-desc">Hear why top podcasters, GRAMMY® winners, and streamers rely on RØDE sound.</p>
+          </div>
+
+          <div class="testimonials-grid" id="testimonials-grid">
+            <!-- Dynamic Testimonials -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 10-Year Warranty & Innovation Callout -->
+      <section class="section warranty-hero-bar">
+        <div class="container flex-between align-center wrap-mobile">
+          <div class="flex items-center gap-6">
+            <div class="warranty-seal">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>10 YR</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-slate-100">Industry-Leading 10-Year Warranty Protection</h3>
+              <p class="text-sm text-slate-400">Every RØDE microphone is precision-engineered in Australia and backed by our worldwide replacement warranty.</p>
+            </div>
+          </div>
+          <a href="#customer-warranty" class="btn btn-outline" data-nav="customer-warranty">
+            <i class="fa-solid fa-id-card"></i> Register Gear Serial Number
+          </a>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PAGE 02: SHOP / PRODUCTS CATALOG WITH FILTERS -->
+    <!-- ====================================================== -->
+    <section id="page-shop" class="page-view">
+      <div class="shop-header-banner">
+        <div class="container">
+          <div class="breadcrumb">
+            <a href="#home" data-nav="home">Home</a> <i class="fa-solid fa-chevron-right text-xs"></i> <span>Catalog & Products</span>
+          </div>
+          <h1 class="page-headline">Shop Professional Audio Gear</h1>
+          <p class="page-subline">Explore studio microphones, podcasting consoles, wireless lavaliers, studio monitoring headphones, and accessories.</p>
+        </div>
+      </div>
+
+      <div class="container shop-layout">
+        <!-- Sidebar Filters -->
+        <aside class="shop-sidebar glassmorphism">
+          <div class="sidebar-header flex-between">
+            <h3 class="sidebar-title"><i class="fa-solid fa-filter text-gold"></i> Filters</h3>
+            <button id="reset-filters-btn" class="text-xs text-gold hover:underline">Reset All</button>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <h4 class="filter-label">Product Category</h4>
+            <div class="filter-options" id="filter-categories">
+              <label class="custom-checkbox">
+                <input type="checkbox" value="all" checked class="category-filter-checkbox" id="cat-all">
+                <span class="checkmark"></span>
+                <span>All Products</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="microphones" class="category-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Microphones</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="consoles" class="category-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Mixers & Consoles</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="wireless" class="category-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Wireless Audio</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="headphones" class="category-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Headphones & Monitoring</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="accessories" class="category-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Arms, Mounts & Cables</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Connectivity / Type Filter -->
+          <div class="filter-group">
+            <h4 class="filter-label">Connectivity & Form Factor</h4>
+            <div class="filter-options" id="filter-connectivity">
+              <label class="custom-checkbox">
+                <input type="checkbox" value="xlr" class="conn-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Pro XLR Studio</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="usb" class="conn-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>USB-C Plug & Play</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="dual" class="conn-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Dual Connect (XLR + USB)</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="wireless" class="conn-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>2.4GHz Digital Wireless</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Creator Workflow -->
+          <div class="filter-group">
+            <h4 class="filter-label">Creator Archetype</h4>
+            <div class="filter-options">
+              <button class="archetype-pill" data-archetype="podcaster">🎙️ Podcasting</button>
+              <button class="archetype-pill" data-archetype="streamer">🎮 Streaming</button>
+              <button class="archetype-pill" data-archetype="music">🎸 Music & Vocals</button>
+              <button class="archetype-pill" data-archetype="video">🎬 Filmmaking</button>
+            </div>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-group">
+            <div class="flex-between">
+              <h4 class="filter-label">Max Price</h4>
+              <span id="price-range-val" class="text-sm font-bold text-gold">$1,000</span>
+            </div>
+            <input type="range" id="price-slider" min="50" max="1000" step="25" value="1000" class="price-range-slider">
+            <div class="flex-between text-xs text-slate-500 mt-1">
+              <span>$50</span>
+              <span>$1,000+</span>
+            </div>
+          </div>
+
+          <!-- Polar Pattern / Feature -->
+          <div class="filter-group">
+            <h4 class="filter-label">Key Features</h4>
+            <div class="filter-options">
+              <label class="custom-checkbox">
+                <input type="checkbox" value="32bit" class="feature-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>32-Bit Float Recording</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="dsp" class="feature-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>APHEX® On-Board DSP</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" value="shockmount" class="feature-filter-checkbox">
+                <span class="checkmark"></span>
+                <span>Includes Pop Filter/Mount</span>
+              </label>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Product Listing Grid Content -->
+        <main class="shop-content">
+          <!-- Top Bar with Search, Count, Sort, Grid toggles -->
+          <div class="shop-toolbar glassmorphism">
+            <div class="toolbar-left">
+              <div class="search-inline">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="shop-search-input" placeholder="Search catalog...">
+              </div>
+              <span id="products-count-label" class="text-sm text-slate-400">Showing <strong>12</strong> gear systems</span>
+            </div>
+            
+            <div class="toolbar-right">
+              <label class="sort-label">
+                <span>Sort by:</span>
+                <select id="shop-sort-select" class="sort-dropdown">
+                  <option value="popular">Most Popular / Flagship</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Customer Rating (Highest)</option>
+                  <option value="name">Product Name (A-Z)</option>
+                </select>
+              </label>
+
+              <div class="view-toggles">
+                <button id="view-grid-btn" class="view-btn active" title="Grid View"><i class="fa-solid fa-grid-2"></i></button>
+                <button id="view-list-btn" class="view-btn" title="List View"><i class="fa-solid fa-list"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Filter Tags Display -->
+          <div id="active-filter-tags" class="active-tags-row hidden">
+            <!-- Injected filter badges -->
+          </div>
+
+          <!-- Catalog Products Grid -->
+          <div class="catalog-grid" id="shop-products-grid">
+            <!-- Injected by JavaScript -->
+          </div>
+
+          <!-- Empty State -->
+          <div id="shop-empty-state" class="empty-state hidden">
+            <i class="fa-solid fa-sliders-simple empty-icon"></i>
+            <h3>No gear found matching your filters</h3>
+            <p>Try clearing some criteria or expanding your price range.</p>
+            <button id="clear-all-filters-btn" class="btn btn-gold btn-sm mt-4">Reset Filters</button>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PAGE 03: PRODUCT DETAILS (360° VIEW & AUDIO SPECS) -->
+    <!-- ====================================================== -->
+    <section id="page-product-details" class="page-view">
+      <div class="container pt-6">
+        <div class="breadcrumb mb-6">
+          <a href="#home" data-nav="home">Home</a> 
+          <i class="fa-solid fa-chevron-right text-xs"></i> 
+          <a href="#shop" data-nav="shop">Shop</a> 
+          <i class="fa-solid fa-chevron-right text-xs"></i> 
+          <span id="pdp-breadcrumb-name" class="text-gold">NT1 5th Generation</span>
+        </div>
+
+        <div class="pdp-hero-grid">
+          <!-- Left: 360° Interactive Visualizer & Gallery -->
+          <div class="pdp-gallery-wrap">
+            <div class="pdp-main-stage glassmorphism">
+              <!-- Interactive 360 Mode Pill -->
+              <div class="pdp-badge-bar">
+                <span class="badge-gold" id="pdp-category-badge">Studio Condenser</span>
+                <button id="toggle-360-btn" class="btn-360 active" title="Drag to rotate product angles">
+                  <i class="fa-solid fa-arrows-spin"></i> 360° Interactive Angle
+                </button>
+              </div>
+
+              <!-- Main Image / 360 Frame Display -->
+              <div class="pdp-360-stage" id="pdp-360-viewport">
+                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1000&q=80" alt="Product View" id="pdp-main-image" class="pdp-interactive-img">
+                <div class="drag-hint-pill" id="pdp-drag-hint">
+                  <i class="fa-solid fa-arrows-left-right"></i> Drag or swipe to inspect 360° view
+                </div>
+              </div>
+
+              <!-- Thumbnail Angle Gallery -->
+              <div class="pdp-thumbs-row" id="pdp-thumbs-container">
+                <!-- Dynamically generated angles -->
+              </div>
+            </div>
+
+            <!-- In the Box Visual Checklist -->
+            <div class="pdp-in-box-card glassmorphism mt-4">
+              <h4 class="font-bold text-sm text-slate-200 mb-3"><i class="fa-solid fa-box-open text-gold"></i> Included in the Box:</h4>
+              <ul class="in-box-list" id="pdp-in-box-list">
+                <!-- Injected checklist -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right: Purchase Controls & Core Highlights -->
+          <div class="pdp-info-panel glassmorphism">
+            <div class="pdp-header">
+              <div class="flex-between">
+                <span class="pdp-sku" id="pdp-sku">SKU: RD-NT1-5G-BLK</span>
+                <div class="pdp-rating-summary">
+                  <div class="stars-gold" id="pdp-star-icons">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <a href="#pdp-reviews-section" class="rating-link" id="pdp-reviews-count-link">(48 verified reviews)</a>
+                </div>
+              </div>
+
+              <h1 class="pdp-title" id="pdp-title">NT1 5th Generation</h1>
+              <p class="pdp-tagline" id="pdp-tagline">Studio Condenser with Dual Connect XLR/USB & 32-bit Float</p>
+              
+              <div class="pdp-price-wrap">
+                <span class="pdp-price" id="pdp-price">$249.00</span>
+                <span class="pdp-stock-status in-stock" id="pdp-stock"><i class="fa-solid fa-circle-check"></i> In Stock (Ships Today)</span>
+              </div>
+            </div>
+
+            <hr class="border-slate-800 my-4">
+
+            <!-- Interactive Audio Demo Player Box -->
+            <div class="pdp-audio-tester-box">
+              <div class="audio-tester-header">
+                <span class="text-xs font-bold text-gold uppercase tracking-wider"><i class="fa-solid fa-waveform"></i> Studio Voice Sample Tester</span>
+                <span class="text-xs text-slate-400">Recorded in Sydney Labs</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-1 mb-3">Compare raw cardioid capture vs untreated noisy room simulation.</p>
+              
+              <div class="sample-switcher-buttons">
+                <button class="sample-btn active" data-sample="studio">🎙️ Clean Vocal Studio</button>
+                <button class="sample-btn" data-sample="podcast">👥 Multi-Person Podcast</button>
+                <button class="sample-btn" data-sample="noisy">🏙️ Room Noise Rejection</button>
+              </div>
+
+              <div class="sample-player-bar">
+                <button id="pdp-sample-play-trigger" class="sample-play-btn"><i class="fa-solid fa-play"></i></button>
+                <div class="sample-progress-wrap">
+                  <div class="sample-progress-bar" id="pdp-audio-progress"></div>
+                </div>
+                <span class="sample-time" id="pdp-sample-time">0:00 / 0:15</span>
+              </div>
+            </div>
+
+            <!-- Color / Finish Selector -->
+            <div class="pdp-variants-section mt-4">
+              <label class="text-xs uppercase font-bold text-slate-400 mb-2 block">Finish / Color:</label>
+              <div class="color-options" id="pdp-color-options">
+                <button class="color-chip active" data-color="Black"><span class="color-dot bg-black"></span> Classic Matte Black</button>
+                <button class="color-chip" data-color="Silver"><span class="color-dot bg-slate-300"></span> Satin Nickel Silver</button>
+              </div>
+            </div>
+
+            <!-- Add to Cart & Buy CTA -->
+            <div class="pdp-purchase-actions mt-6">
+              <div class="quantity-picker">
+                <button id="pdp-qty-minus" class="qty-btn"><i class="fa-solid fa-minus"></i></button>
+                <input type="number" id="pdp-qty-input" value="1" min="1" max="99" class="qty-input">
+                <button id="pdp-qty-plus" class="qty-btn"><i class="fa-solid fa-plus"></i></button>
+              </div>
+              
+              <button id="pdp-add-to-cart-btn" class="btn btn-gold btn-lg flex-1">
+                <i class="fa-solid fa-bag-shopping"></i> Add to Cart
+              </button>
+              
+              <button id="pdp-wishlist-toggle-btn" class="btn btn-outline btn-square" title="Save to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+
+              <button id="pdp-compare-add-btn" class="btn btn-outline btn-square" title="Add to Comparison Drawer">
+                <i class="fa-solid fa-code-compare"></i>
+              </button>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="pdp-trust-grid mt-6">
+              <div class="trust-item">
+                <i class="fa-solid fa-shield-check text-gold"></i>
+                <span>10-Year Global Warranty</span>
+              </div>
+              <div class="trust-item">
+                <i class="fa-solid fa-truck-fast text-gold"></i>
+                <span>Free 2-Day Priority Shipping</span>
+              </div>
+              <div class="trust-item">
+                <i class="fa-solid fa-arrow-rotate-left text-gold"></i>
+                <span>30-Day Studio Money Back</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Technical Deep-Dive Tabs (Specs, Warranty, Comparisons, Reviews) -->
+        <div class="pdp-tabs-container mt-12">
+          <div class="pdp-tab-nav">
+            <button class="pdp-nav-tab active" data-tab="specs"><i class="fa-solid fa-list-check"></i> Acoustic & Technical Specs</button>
+            <button class="pdp-nav-tab" data-tab="warranty"><i class="fa-solid fa-shield-halved"></i> 10-Year Warranty & Support</button>
+            <button class="pdp-nav-tab" data-tab="comparison"><i class="fa-solid fa-scale-balanced"></i> Side-by-Side Comparison</button>
+            <button class="pdp-nav-tab" data-tab="reviews"><i class="fa-solid fa-comment-dots"></i> Verified Reviews (<span id="tab-reviews-count">48</span>)</button>
+          </div>
+
+          <div class="pdp-tab-contents glassmorphism">
+            <!-- TAB 1: SPECS -->
+            <div id="tab-pane-specs" class="pdp-pane active">
+              <h3 class="pane-title">Acoustic & Electrical Specifications</h3>
+              <div class="specs-table-wrap">
+                <table class="specs-table" id="pdp-specs-table">
+                  <!-- Dynamic table rows -->
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB 2: WARRANTY & REGISTRATION -->
+            <div id="tab-pane-warranty" class="pdp-pane">
+              <div class="warranty-pane-grid">
+                <div>
+                  <h3 class="pane-title">10-Year Extended Manufacturer Warranty</h3>
+                  <p class="text-slate-300 mb-4">RØDE guarantees this product against manufacturing defects in materials and workmanship for a period of ten (10) years from the date of original retail purchase when registered online.</p>
+                  
+                  <ul class="warranty-perks-list">
+                    <li><i class="fa-solid fa-check text-gold"></i> Full replacement or certified laboratory repair</li>
+                    <li><i class="fa-solid fa-check text-gold"></i> Direct Sydney Engineering diagnostic support</li>
+                    <li><i class="fa-solid fa-check text-gold"></i> Transferable digital warranty certificate generated instantly</li>
+                  </ul>
+
+                  <button id="pdp-register-this-warranty-btn" class="btn btn-gold btn-sm mt-6">
+                    <i class="fa-solid fa-id-badge"></i> Register This Gear Serial Number Now
+                  </button>
+                </div>
+                <div class="warranty-pane-card glassmorphism text-center">
+                  <i class="fa-solid fa-certificate gold-cert-icon"></i>
+                  <h4>Official RØDE Genuine Product</h4>
+                  <p class="text-xs text-slate-400 mt-2">Serial numbers can be verified via the customer dashboard anytime.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: SIDE BY SIDE COMPARISON -->
+            <div id="tab-pane-comparison" class="pdp-pane">
+              <h3 class="pane-title">How It Compares to Other RØDE Models</h3>
+              <div class="table-responsive">
+                <table class="comparison-quick-table" id="pdp-compare-matrix-table">
+                  <!-- Injected comparison matrix -->
+                </table>
+              </div>
+            </div>
+
+            <!-- TAB 4: REVIEWS & RATING BREAKDOWN -->
+            <div id="tab-pane-reviews" class="pdp-pane">
+              <div class="reviews-layout">
+                <!-- Review Score Breakdown -->
+                <div class="reviews-summary-card">
+                  <div class="score-big" id="pdp-review-score-big">4.9</div>
+                  <div class="stars-gold text-lg" id="pdp-review-stars-big">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-1">Based on <span id="pdp-review-total-verified">48</span> verified creator reviews</p>
+                  
+                  <!-- Bar distribution -->
+                  <div class="rating-bars mt-4">
+                    <div class="rating-bar-row">
+                      <span>5 Star</span>
+                      <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 90%;"></div></div>
+                      <span>90%</span>
+                    </div>
+                    <div class="rating-bar-row">
+                      <span>4 Star</span>
+                      <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 8%;"></div></div>
+                      <span>8%</span>
+                    </div>
+                    <div class="rating-bar-row">
+                      <span>3 Star</span>
+                      <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 2%;"></div></div>
+                      <span>2%</span>
+                    </div>
+                  </div>
+
+                  <button id="write-review-open-btn" class="btn btn-outline btn-sm w-full mt-6">
+                    <i class="fa-solid fa-pen"></i> Write a Creator Review
+                  </button>
+                </div>
+
+                <!-- Review Feed & Review Submission Form -->
+                <div class="reviews-feed-wrap">
+                  <!-- Review Form (Toggleable) -->
+                  <div id="new-review-form-card" class="new-review-form glassmorphism hidden mb-6">
+                    <h4 class="font-bold text-slate-100 mb-2">Submit Your Review for this Gear</h4>
+                    <form id="submit-review-form">
+                      <div class="form-row">
+                        <div class="form-group flex-1">
+                          <label>Your Name / Channel</label>
+                          <input type="text" id="review-author-input" required placeholder="e.g. Sarah K. (Audio Producer)" class="form-input">
+                        </div>
+                        <div class="form-group">
+                          <label>Star Rating</label>
+                          <select id="review-rating-input" class="form-input">
+                            <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+                            <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+                            <option value="3">⭐⭐⭐ 3 Stars</option>
+                            <option value="2">⭐⭐ 2 Stars</option>
+                            <option value="1">⭐ 1 Star</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group mt-3">
+                        <label>Review Headline</label>
+                        <input type="text" id="review-title-input" required placeholder="Unbelievable audio quality & 32-bit float headroom" class="form-input">
+                      </div>
+                      <div class="form-group mt-3">
+                        <label>Your Detailed Thoughts</label>
+                        <textarea id="review-body-input" rows="3" required placeholder="Share your experience with preamp noise, gain staging, build quality..." class="form-input"></textarea>
+                      </div>
+                      <div class="flex-end gap-3 mt-4">
+                        <button type="button" id="cancel-review-btn" class="btn btn-ghost btn-sm">Cancel</button>
+                        <button type="submit" class="btn btn-gold btn-sm"><i class="fa-solid fa-paper-plane"></i> Publish Review</button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- Reviews List -->
+                  <div class="reviews-list" id="pdp-reviews-feed">
+                    <!-- Injected customer reviews -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PAGE 04: AUDIO GUIDES & INTERACTIVE COMPARISONS -->
+    <!-- ====================================================== -->
+    <section id="page-guides" class="page-view">
+      <div class="guides-header-banner">
+        <div class="container">
+          <div class="breadcrumb">
+            <a href="#home" data-nav="home">Home</a> <i class="fa-solid fa-chevron-right text-xs"></i> <span>Audio Guides & Studio Comparisons</span>
+          </div>
+          <h1 class="page-headline">Audio Guides, Shootouts & Studio Tutorials</h1>
+          <p class="page-subline">Master microphone acoustics, noise-cancellation physics, polar pattern directivity, and setup your ultimate recording space.</p>
+        </div>
+      </div>
+
+      <div class="container py-8">
+        
+        <!-- Interactive Acoustic Lab Tool: Studio Noise-Cancellation & Room Reverb Simulator -->
+        <div class="acoustic-lab-card glassmorphism mb-12">
+          <div class="acoustic-header">
+            <div>
+              <span class="badge-gold"><i class="fa-solid fa-flask"></i> INTERACTIVE ACOUSTIC LAB</span>
+              <h2 class="text-2xl font-bold text-slate-100 mt-1">Noise Cancellation & Acoustic Treatment Simulator</h2>
+              <p class="text-sm text-slate-400">Hear the difference real acoustic foam panels, bass traps, and APHEX® noise-gate algorithms make in real time.</p>
+            </div>
+            <div class="acoustic-toggle-group">
+              <button id="toggle-acoustic-sim-btn" class="btn btn-gold"><i class="fa-solid fa-volume-high"></i> Start Live Acoustic Audio Test</button>
+            </div>
+          </div>
+
+          <div class="acoustic-controls-grid mt-6">
+            <div class="acoustic-panel-box">
+              <label class="block text-xs font-bold text-slate-300 mb-2">Room Acoustic Treatment Level:</label>
+              <div class="room-selector-btns">
+                <button class="room-btn active" data-room="treated">🎙️ Soundproof Studio Booth (0.15s Reverb)</button>
+                <button class="room-btn" data-room="bedroom">🛏️ Typical Home Bedroom (0.65s Reverb)</button>
+                <button class="room-btn" data-room="echo">🏢 Glass Office / Echo Hall (1.40s Reverb)</button>
+              </div>
+            </div>
+
+            <div class="acoustic-panel-box">
+              <label class="block text-xs font-bold text-slate-300 mb-2">APHEX® DSP Processing Chain:</label>
+              <div class="dsp-switches-grid">
+                <label class="dsp-switch">
+                  <input type="checkbox" id="dsp-noisegate" checked>
+                  <span class="dsp-pill"><i class="fa-solid fa-door-closed"></i> Smart Noise Gate</span>
+                </label>
+                <label class="dsp-switch">
+                  <input type="checkbox" id="dsp-exciter" checked>
+                  <span class="dsp-pill"><i class="fa-solid fa-sparkles"></i> Aural Exciter®</span>
+                </label>
+                <label class="dsp-switch">
+                  <input type="checkbox" id="dsp-bigbottom" checked>
+                  <span class="dsp-pill"><i class="fa-solid fa-wave-square"></i> Big Bottom™ Bass</span>
+                </label>
+                <label class="dsp-switch">
+                  <input type="checkbox" id="dsp-highpass">
+                  <span class="dsp-pill"><i class="fa-solid fa-wind"></i> 80Hz Low Cut</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Realtime Audio Frequency Canvas Output -->
+          <div class="acoustic-canvas-wrap mt-6">
+            <div class="flex-between text-xs text-slate-400 mb-1">
+              <span>Real-Time Frequency Response: 20Hz - 20,000Hz</span>
+              <span id="acoustic-dsp-status" class="text-gold font-mono">Status: APHEX® DSP Engaged</span>
+            </div>
+            <canvas id="acoustic-lab-canvas" width="900" height="90" class="w-full"></canvas>
+          </div>
+        </div>
+
+        <!-- Interactive Drag-and-Drop Microphone Comparison Shootout -->
+        <div class="section-header">
+          <span class="section-badge"><i class="fa-solid fa-code-compare text-gold"></i> MICROPHONE SHOOTOUT MATRIX</span>
+          <h2 class="section-title">Side-by-Side Microphone Spec & Audio Comparison</h2>
+          <p class="section-desc">Pick any 2 to 4 microphones from the RØDE lineup to compare acoustic directivity, sensitivity, frequency curve, and price.</p>
+        </div>
+
+        <div class="comparison-studio-wrap glassmorphism mb-12" id="comparison-section">
+          <div class="compare-selector-bar">
+            <span class="text-sm font-bold text-slate-300">Quick Select Gear to Compare:</span>
+            <div class="compare-pills" id="quick-compare-pills">
+              <!-- Injected pills -->
+            </div>
+          </div>
+
+          <div class="compare-matrix-scroll">
+            <table class="compare-full-table" id="guides-compare-table">
+              <!-- Injected dynamic matrix comparison -->
+            </table>
+          </div>
+        </div>
+
+        <!-- Educational Step-by-Step Recording Setup Guides -->
+        <div class="section-header">
+          <span class="section-badge"><i class="fa-solid fa-book-open-reader text-gold"></i> CREATOR TUTORIALS</span>
+          <h2 class="section-title">Studio Mastery & Recording Masterclasses</h2>
+          <p class="section-desc">Comprehensive step-by-step guides with signal chain diagrams and gear checklists.</p>
+        </div>
+
+        <div class="guides-grid" id="audio-guides-grid">
+          <!-- Injected interactive tutorial cards -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- PAGE 05: CART, CHECKOUT & CUSTOMER ACCOUNT PORTAL -->
+    <!-- ====================================================== -->
+    <section id="page-cart-account" class="page-view">
+      
+      <div class="container py-8">
+        
+        <!-- Tab Navigation for Cart / Checkout / Customer Portal Views -->
+        <div class="account-nav-bar glassmorphism mb-8">
+          <div class="account-tabs-list" id="account-view-tabs">
+            <button class="acc-tab-btn active" data-subview="cart-view">
+              <i class="fa-solid fa-bag-shopping"></i> Shopping Cart (<span id="acc-cart-count">0</span>)
+            </button>
+            <button class="acc-tab-btn" data-subview="checkout-view">
+              <i class="fa-solid fa-credit-card"></i> Secure Checkout
+            </button>
+            <button class="acc-tab-btn" data-subview="orders-view">
+              <i class="fa-solid fa-box"></i> Order History & Tracking
+            </button>
+            <button class="acc-tab-btn" data-subview="warranty-view">
+              <i class="fa-solid fa-shield-halved"></i> 10-Yr Warranty Registration
+            </button>
+            <button class="acc-tab-btn" data-subview="wishlist-view">
+              <i class="fa-solid fa-heart"></i> Saved Wishlist (<span id="acc-wishlist-count">0</span>)
+            </button>
+            <button class="acc-tab-btn" data-subview="invoices-view">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Receipts
+            </button>
+            <button class="acc-tab-btn" data-subview="profile-view">
+              <i class="fa-solid fa-user-gear"></i> Studio Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= SUBVIEW: CART ================= -->
+        <div id="subview-cart-view" class="account-subview active">
+          <div class="cart-page-layout">
+            <!-- Left: Cart Items List -->
+            <div class="cart-items-card glassmorphism">
+              <div class="cart-card-header flex-between">
+                <h2 class="text-xl font-bold text-slate-100"><i class="fa-solid fa-bag-shopping text-gold"></i> Your Studio Gear Bag</h2>
+                <button id="cart-clear-all-btn" class="text-xs text-red-400 hover:underline">Clear Bag</button>
+              </div>
+
+              <div id="cart-items-container" class="cart-items-list mt-4">
+                <!-- Dynamically rendered cart rows -->
+              </div>
+
+              <!-- Free Shipping Progress Tracker -->
+              <div class="shipping-tracker-bar mt-6">
+                <div class="flex-between text-xs text-slate-300 mb-1">
+                  <span id="shipping-tracker-text"><i class="fa-solid fa-truck-fast text-gold"></i> Add $25.00 more for Free Global Priority Shipping</span>
+                  <span id="shipping-tracker-pct" class="font-bold text-gold">85%</span>
+                </div>
+                <div class="tracker-track">
+                  <div id="shipping-tracker-fill" class="tracker-fill" style="width: 85%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Order Summary Box -->
+            <div class="cart-summary-card glassmorphism">
+              <h3 class="text-lg font-bold text-slate-100 mb-4">Order Summary</h3>
+              
+              <div class="summary-line">
+                <span>Gear Subtotal</span>
+                <span id="summary-subtotal">$0.00</span>
+              </div>
+              <div class="summary-line">
+                <span>Estimated Express Shipping</span>
+                <span id="summary-shipping" class="text-emerald-400">FREE</span>
+              </div>
+              <div class="summary-line">
+                <span>Estimated Tax (GST / VAT)</span>
+                <span id="summary-tax">$0.00</span>
+              </div>
+              <div class="summary-line discount hidden" id="summary-discount-row">
+                <span>Promo Discount (<span id="summary-discount-code">RODEPRO</span>)</span>
+                <span id="summary-discount-val">-$0.00</span>
+              </div>
+
+              <hr class="border-slate-800 my-3">
+
+              <!-- Promo Code Input -->
+              <div class="promo-box mb-4">
+                <div class="flex gap-2">
+                  <input type="text" id="promo-code-input" placeholder="Promo code (e.g. RODE2026)" class="form-input flex-1 uppercase">
+                  <button id="apply-promo-btn" class="btn btn-outline btn-sm">Apply</button>
+                </div>
+                <p id="promo-status-msg" class="text-xs mt-1 text-slate-400">Use <strong>RODE2026</strong> for 10% creator discount.</p>
+              </div>
+
+              <div class="summary-total-line mb-6">
+                <div>
+                  <span class="text-slate-300 font-bold block">Grand Total</span>
+                  <span class="text-xs text-slate-500">Includes 10-Yr Warranty Coverage</span>
+                </div>
+                <span id="summary-total" class="total-amount">$0.00</span>
+              </div>
+
+              <button id="proceed-to-checkout-btn" class="btn btn-gold btn-lg w-full">
+                <i class="fa-solid fa-lock"></i> Proceed to Secure Checkout
+              </button>
+              
+              <div class="payment-guarantee-icons mt-4">
+                <span><i class="fa-solid fa-shield-check text-gold"></i> 256-Bit SSL Encrypted</span>
+                <span><i class="fa-brands fa-apple-pay"></i> Apple Pay</span>
+                <span><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                <span><i class="fa-brands fa-cc-mastercard"></i> MC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SUBVIEW: CHECKOUT ================= -->
+        <div id="subview-checkout-view" class="account-subview">
+          <div class="checkout-layout">
+            <div class="checkout-form-card glassmorphism">
+              <!-- Steps Indicator -->
+              <div class="checkout-steps-bar mb-6">
+                <div class="chk-step active"><span class="step-num">1</span> Shipping Details</div>
+                <div class="chk-step"><span class="step-num">2</span> Payment Method</div>
+                <div class="chk-step"><span class="step-num">3</span> Studio Manifest Review</div>
+              </div>
+
+              <form id="checkout-form">
+                <h3 class="text-lg font-bold text-slate-100 mb-4"><i class="fa-solid fa-location-dot text-gold"></i> Shipping & Delivery Information</h3>
+                
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label>First Name</label>
+                    <input type="text" id="chk-fname" required value="Alex" class="form-input">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Last Name</label>
+                    <input type="text" id="chk-lname" required value="Vance" class="form-input">
+                  </div>
+                </div>
+
+                <div class="form-row mt-3">
+                  <div class="form-group flex-1">
+                    <label>Email Address for Order Confirmation & Warranty</label>
+                    <input type="email" id="chk-email" required value="alex.vance@studio.audio" class="form-input">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Phone Number (for Courier SMS updates)</label>
+                    <input type="tel" id="chk-phone" required value="+1 (555) 382-9012" class="form-input">
+                  </div>
+                </div>
+
+                <div class="form-group mt-3">
+                  <label>Street Address</label>
+                  <input type="text" id="chk-address" required value="404 Acoustic Way, Sound Studio 8" class="form-input">
+                </div>
+
+                <div class="form-row mt-3">
+                  <div class="form-group flex-1">
+                    <label>City</label>
+                    <input type="text" id="chk-city" required value="Los Angeles" class="form-input">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>State / Region</label>
+                    <input type="text" id="chk-state" required value="California" class="form-input">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Zip / Postal Code</label>
+                    <input type="text" id="chk-zip" required value="90210" class="form-input">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Country</label>
+                    <select id="chk-country" class="form-input">
+                      <option value="US">United States</option>
+                      <option value="AU">Australia</option>
+                      <option value="GB">United Kingdom</option>
+                      <option value="CA">Canada</option>
+                      <option value="DE">Germany</option>
+                      <option value="JP">Japan</option>
+                    </select>
+                  </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-slate-100 mt-8 mb-4"><i class="fa-solid fa-credit-card text-gold"></i> Payment Information</h3>
+                
+                <div class="payment-method-selector mb-4">
+                  <label class="pay-method-pill active">
+                    <input type="radio" name="paymethod" value="credit" checked>
+                    <span><i class="fa-solid fa-credit-card"></i> Credit / Debit Card</span>
+                  </label>
+                  <label class="pay-method-pill">
+                    <input type="radio" name="paymethod" value="applepay">
+                    <span><i class="fa-brands fa-apple-pay"></i> Apple Pay</span>
+                  </label>
+                  <label class="pay-method-pill">
+                    <input type="radio" name="paymethod" value="paypal">
+                    <span><i class="fa-brands fa-paypal"></i> PayPal</span>
+                  </label>
+                </div>
+
+                <div id="card-fields-wrap">
+                  <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" id="chk-cardnum" required value="•••• •••• •••• 4242" class="form-input font-mono">
+                  </div>
+                  <div class="form-row mt-3">
+                    <div class="form-group flex-1">
+                      <label>Expiry Date</label>
+                      <input type="text" id="chk-cardexp" required value="09/28" placeholder="MM/YY" class="form-input font-mono">
+                    </div>
+                    <div class="form-group flex-1">
+                      <label>CVC / Security Code</label>
+                      <input type="text" id="chk-cardcvc" required value="892" class="form-input font-mono">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checkout-actions mt-8 flex-between">
+                  <button type="button" class="btn btn-outline" data-subview-target="cart-view">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Cart
+                  </button>
+                  <button type="submit" id="place-order-submit-btn" class="btn btn-gold btn-lg">
+                    <i class="fa-solid fa-shield-check"></i> Authorize & Place Order (<span id="chk-btn-total">$0.00</span>)
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Mini Summary on Checkout -->
+            <div class="checkout-summary-sidebar glassmorphism">
+              <h3 class="text-base font-bold text-slate-100 mb-3">Order Items</h3>
+              <div id="checkout-mini-items" class="mini-items-list">
+                <!-- Injected mini items -->
+              </div>
+              <hr class="border-slate-800 my-4">
+              <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="chk-subtotal">$0.00</span>
+              </div>
+              <div class="summary-line">
+                <span>Express Courier</span>
+                <span class="text-emerald-400">FREE</span>
+              </div>
+              <div class="summary-line">
+                <span>Tax</span>
+                <span id="chk-tax">$0.00</span>
+              </div>
+              <div class="summary-total-line mt-3">
+                <span class="font-bold text-slate-200">Total:</span>
+                <span id="chk-total-sum" class="total-amount">$0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SUBVIEW: ORDER HISTORY ================= -->
+        <div id="subview-orders-view" class="account-subview">
+          <div class="portal-card glassmorphism">
+            <div class="portal-header flex-between">
+              <div>
+                <h2 class="text-xl font-bold text-slate-100"><i class="fa-solid fa-box text-gold"></i> Orders & Shipments Tracker</h2>
+                <p class="text-xs text-slate-400">Track delivery status, download invoices, and register serial numbers.</p>
+              </div>
+              <div class="order-filter-chips">
+                <button class="filter-chip active" data-order-filter="all">All Orders</button>
+                <button class="filter-chip" data-order-filter="Processing">Processing</button>
+                <button class="filter-chip" data-order-filter="Shipped">In Transit</button>
+                <button class="filter-chip" data-order-filter="Delivered">Delivered</button>
+              </div>
+            </div>
+
+            <div id="customer-orders-list" class="orders-timeline-wrap mt-6">
+              <!-- Dynamically rendered orders -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SUBVIEW: 10-YEAR WARRANTY REGISTRATION ================= -->
+        <div id="subview-warranty-view" class="account-subview">
+          <div class="warranty-portal-layout">
+            <!-- Left: Registration Form -->
+            <div class="portal-card glassmorphism">
+              <div class="portal-header">
+                <span class="badge-gold"><i class="fa-solid fa-shield-halved"></i> OFFICIAL REGISTRATION</span>
+                <h2 class="text-xl font-bold text-slate-100 mt-1">Register Your RØDE Hardware Serial Number</h2>
+                <p class="text-xs text-slate-400">Activate your 10-year extended warranty and unlock direct Sydney laboratory support.</p>
+              </div>
+
+              <form id="warranty-reg-form" class="mt-4">
+                <div class="form-group">
+                  <label>Select Your Hardware Gear</label>
+                  <select id="warranty-product-select" class="form-input" required>
+                    <!-- Injected products -->
+                  </select>
+                </div>
+
+                <div class="form-row mt-3">
+                  <div class="form-group flex-1">
+                    <label>Hardware Serial Number (on mic base / barcode)</label>
+                    <input type="text" id="warranty-serial-input" required placeholder="e.g. RD-NT1-883921" class="form-input font-mono uppercase">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Purchase Date</label>
+                    <input type="date" id="warranty-date-input" required class="form-input">
+                  </div>
+                </div>
+
+                <div class="form-row mt-3">
+                  <div class="form-group flex-1">
+                    <label>Place of Purchase / Dealer</label>
+                    <input type="text" id="warranty-dealer-input" required value="Official RØDE Online Store" class="form-input">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Invoice Number / Receipt ID</label>
+                    <input type="text" id="warranty-invoice-input" required placeholder="INV-2026-0042" class="form-input font-mono">
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-gold btn-md mt-6">
+                  <i class="fa-solid fa-certificate"></i> Activate 10-Year Warranty & Generate Certificate
+                </button>
+              </form>
+            </div>
+
+            <!-- Right: Registered Devices Certificates -->
+            <div class="portal-card glassmorphism">
+              <h3 class="text-lg font-bold text-slate-100 mb-2"><i class="fa-solid fa-award text-gold"></i> Active Hardware Certificates</h3>
+              <p class="text-xs text-slate-400 mb-4">Your hardware protected under RØDE Global Lifetime Care.</p>
+
+              <div id="registered-warranties-list" class="warranties-card-list">
+                <!-- Dynamically generated certificates -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SUBVIEW: WISHLIST ================= -->
+        <div id="subview-wishlist-view" class="account-subview">
+          <div class="portal-card glassmorphism">
+            <div class="portal-header flex-between">
+              <div>
+                <h2 class="text-xl font-bold text-slate-100"><i class="fa-solid fa-heart text-gold"></i> Saved Studio Wishlist</h2>
+                <p class="text-xs text-slate-400">Keep track of gear upgrades for your future studio expansions.</p>
+              </div>
+              <button id="move-all-wishlist-cart-btn" class="btn btn-gold btn-sm">
+                <i class="fa-solid fa-cart-plus"></i> Move All to Cart
+              </button>
+            </div>
+
+            <div id="customer-wishlist-grid" class="products-grid mt-6">
+              <!-- Dynamically populated wishlist items -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SUBVIEW: INVOICES ================= -->
+        <div id="subview-invoices-view" class="account-subview">
+          <div class="portal-card glassmorphism">
+            <div class="portal-header flex-between">
+              <div>
+                <h2 class="text-xl font-bold text-slate-100"><i class="fa-solid fa-file-invoice-dollar text-gold"></i> Invoices & Tax Receipts</h2>
+                <p class="text-xs text-slate-400">Official tax invoices for business expense deductions and equipment insurance.</p>
+              </div>
+            </div>
+
+            <div id="customer-invoices-list" class="invoices-table-wrap mt-6">
+              <!-- Dynamic invoices table -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SUBVIEW: PROFILE & SETTINGS ================= -->
+        <div id="subview-profile-view" class="account-subview">
+          <div class="portal-card glassmorphism">
+            <div class="portal-header">
+              <h2 class="text-xl font-bold text-slate-100"><i class="fa-solid fa-user-gear text-gold"></i> Studio Profile & Preferences</h2>
+              <p class="text-xs text-slate-400">Manage creator settings, primary recording DAW, and notification preferences.</p>
+            </div>
+
+            <form id="profile-settings-form" class="mt-6">
+              <div class="form-row">
+                <div class="form-group flex-1">
+                  <label>Full Name</label>
+                  <input type="text" id="prof-name" value="Alex Vance" class="form-input">
+                </div>
+                <div class="form-group flex-1">
+                  <label>Email Address</label>
+                  <input type="email" id="prof-email" value="alex.vance@studio.audio" class="form-input">
+                </div>
+              </div>
+
+              <div class="form-row mt-3">
+                <div class="form-group flex-1">
+                  <label>Primary Studio DAW / Software</label>
+                  <select id="prof-daw" class="form-input">
+                    <option value="rode-connect">RØDE Connect / Central</option>
+                    <option value="logic">Logic Pro X</option>
+                    <option value="reaper">Reaper</option>
+                    <option value="protools">Pro Tools</option>
+                    <option value="obs">OBS Studio / Streamlabs</option>
+                  </select>
+                </div>
+                <div class="form-group flex-1">
+                  <label>Creator Discipline</label>
+                  <select id="prof-archetype" class="form-input">
+                    <option value="podcasting">Professional Podcasting</option>
+                    <option value="streaming">Live Streamer</option>
+                    <option value="music">Vocalist & Music Producer</option>
+                    <option value="filmmaking">Broadcast & Filmmaking</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-gold btn-md mt-6">
+                <i class="fa-solid fa-floppy-disk"></i> Save Studio Preferences
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- COMPREHENSIVE ADMIN MANAGEMENT DASHBOARD VIEW -->
+    <!-- ====================================================== -->
+    <section id="page-admin" class="page-view">
+      <div class="admin-wrapper">
+        <!-- Admin Sidebar Nav -->
+        <aside class="admin-sidebar glassmorphism">
+          <div class="admin-brand">
+            <span class="badge-gold"><i class="fa-solid fa-lock"></i> ADMIN SUITE</span>
+            <h2 class="admin-title">RØDE Store Control</h2>
+          </div>
+
+          <ul class="admin-nav-list">
+            <li><button class="admin-nav-item active" data-admin-pane="overview"><i class="fa-solid fa-chart-pie"></i> Analytics & Overview</button></li>
+            <li><button class="admin-nav-item" data-admin-pane="products"><i class="fa-solid fa-microphone-lines"></i> Product Catalog (<span id="admin-prod-count">12</span>)</button></li>
+            <li><button class="admin-nav-item" data-admin-pane="orders"><i class="fa-solid fa-box-archive"></i> Customer Orders (<span id="admin-orders-count">4</span>)</button></li>
+            <li><button class="admin-nav-item" data-admin-pane="warranties"><i class="fa-solid fa-shield-check"></i> Warranty Registrations (<span id="admin-warranties-count">3</span>)</button></li>
+            <li><button class="admin-nav-item" data-admin-pane="inventory"><i class="fa-solid fa-warehouse"></i> Inventory & Stock Alerts</button></li>
+            <li><button class="admin-nav-item" data-admin-pane="reviews"><i class="fa-solid fa-star-half-stroke"></i> Reviews Moderation</button></li>
+            <li><button class="admin-nav-item" data-admin-pane="reports"><i class="fa-solid fa-file-export"></i> Export Data & Reports</button></li>
+            <li><button class="admin-nav-item" data-admin-pane="settings"><i class="fa-solid fa-sliders"></i> Store Configuration</button></li>
+          </ul>
+
+          <div class="admin-footer-status">
+            <span class="status-dot online"></span>
+            <span class="text-xs text-slate-400">Engine v2026.4.1 (Active)</span>
+          </div>
+        </aside>
+
+        <!-- Admin Content Area -->
+        <main class="admin-main">
+          
+          <!-- ADMIN PANE 1: ANALYTICS & OVERVIEW -->
+          <div id="admin-pane-overview" class="admin-pane active">
+            <div class="admin-pane-header flex-between">
+              <div>
+                <h1 class="text-2xl font-bold text-slate-100">Executive Performance Dashboard</h1>
+                <p class="text-xs text-slate-400">Live metrics across global orders, warranty registrations, and gear revenue.</p>
+              </div>
+              <button id="refresh-admin-stats-btn" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-rotate-right"></i> Refresh Realtime Stats</button>
+            </div>
+
+            <!-- KPI Cards Grid -->
+            <div class="admin-kpi-grid mt-6">
+              <div class="kpi-card glassmorphism">
+                <div class="kpi-icon gold"><i class="fa-solid fa-dollar-sign"></i></div>
+                <div class="kpi-info">
+                  <span class="kpi-label">Gross Revenue</span>
+                  <h3 class="kpi-value" id="kpi-revenue">$148,920.00</h3>
+                  <span class="kpi-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +18.4% vs last month</span>
+                </div>
+              </div>
+
+              <div class="kpi-card glassmorphism">
+                <div class="kpi-icon blue"><i class="fa-solid fa-box-open"></i></div>
+                <div class="kpi-info">
+                  <span class="kpi-label">Orders Processed</span>
+                  <h3 class="kpi-value" id="kpi-orders">384</h3>
+                  <span class="kpi-trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +12 new today</span>
+                </div>
+              </div>
+
+              <div class="kpi-card glassmorphism">
+                <div class="kpi-icon purple"><i class="fa-solid fa-certificate"></i></div>
+                <div class="kpi-info">
+                  <span class="kpi-label">10-Yr Warranties Registered</span>
+                  <h3 class="kpi-value" id="kpi-warranties">1,842</h3>
+                  <span class="kpi-trend positive"><i class="fa-solid fa-check"></i> 99.4% approval rate</span>
+                </div>
+              </div>
+
+              <div class="kpi-card glassmorphism">
+                <div class="kpi-icon emerald"><i class="fa-solid fa-star"></i></div>
+                <div class="kpi-info">
+                  <span class="kpi-label">Average Satisfaction</span>
+                  <h3 class="kpi-value" id="kpi-rating">4.92 / 5.0</h3>
+                  <span class="kpi-trend positive"><i class="fa-solid fa-thumbs-up"></i> 98% 5-star ratio</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="admin-charts-grid mt-6">
+              <div class="chart-card glassmorphism">
+                <div class="chart-header flex-between mb-3">
+                  <h3 class="font-bold text-slate-200">Revenue Trend (2026 Monthly)</h3>
+                  <span class="badge-gold text-xs">Gross USD</span>
+                </div>
+                <div class="chart-canvas-wrap">
+                  <canvas id="admin-revenue-chart"></canvas>
+                </div>
+              </div>
+
+              <div class="chart-card glassmorphism">
+                <div class="chart-header flex-between mb-3">
+                  <h3 class="font-bold text-slate-200">Sales by Category Distribution</h3>
+                  <span class="badge-gold text-xs">Volume Share</span>
+                </div>
+                <div class="chart-canvas-wrap">
+                  <canvas id="admin-category-chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADMIN PANE 2: PRODUCTS MANAGEMENT -->
+          <div id="admin-pane-products" class="admin-pane">
+            <div class="admin-pane-header flex-between">
+              <div>
+                <h1 class="text-2xl font-bold text-slate-100">Product Catalog Management</h1>
+                <p class="text-xs text-slate-400">Add new audio gear, edit specifications, modify stock and pricing.</p>
+              </div>
+              <button id="admin-add-product-btn" class="btn btn-gold btn-sm"><i class="fa-solid fa-plus"></i> Add New Product</button>
+            </div>
+
+            <!-- Product Add / Edit Modal -->
+            <div id="admin-product-modal" class="modal-overlay hidden">
+              <div class="admin-modal-card glassmorphism">
+                <div class="modal-header flex-between">
+                  <h3 id="admin-modal-title" class="font-bold text-lg text-slate-100">Add New Gear</h3>
+                  <button id="admin-close-modal-btn" class="modal-close-icon"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <form id="admin-product-form" class="mt-4">
+                  <input type="hidden" id="admin-form-product-id">
+                  
+                  <div class="form-row">
+                    <div class="form-group flex-1">
+                      <label>Product Name</label>
+                      <input type="text" id="admin-form-name" required class="form-input">
+                    </div>
+                    <div class="form-group flex-1">
+                      <label>Category</label>
+                      <select id="admin-form-category" class="form-input">
+                        <option value="microphones">Microphones</option>
+                        <option value="consoles">Mixers & Consoles</option>
+                        <option value="wireless">Wireless Systems</option>
+                        <option value="headphones">Headphones</option>
+                        <option value="accessories">Accessories</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-row mt-3">
+                    <div class="form-group flex-1">
+                      <label>Price ($ USD)</label>
+                      <input type="number" id="admin-form-price" step="0.01" required class="form-input">
+                    </div>
+                    <div class="form-group flex-1">
+                      <label>Inventory Stock</label>
+                      <input type="number" id="admin-form-stock" required class="form-input">
+                    </div>
+                    <div class="form-group flex-1">
+                      <label>Connectivity</label>
+                      <select id="admin-form-connectivity" class="form-input">
+                        <option value="dual">Dual XLR & USB</option>
+                        <option value="xlr">Pro XLR</option>
+                        <option value="usb">USB-C</option>
+                        <option value="wireless">2.4GHz Wireless</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <label>Product Image URL</label>
+                    <input type="url" id="admin-form-image" required class="form-input">
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <label>Tagline / Key Headline</label>
+                    <input type="text" id="admin-form-tagline" required class="form-input">
+                  </div>
+
+                  <div class="form-group mt-3">
+                    <label>Description</label>
+                    <textarea id="admin-form-desc" rows="3" required class="form-input"></textarea>
+                  </div>
+
+                  <div class="modal-actions flex-end gap-3 mt-6">
+                    <button type="button" id="admin-cancel-modal-btn" class="btn btn-ghost btn-sm">Cancel</button>
+                    <button type="submit" class="btn btn-gold btn-sm"><i class="fa-solid fa-check"></i> Save Product</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Products Table -->
+            <div class="table-responsive glassmorphism mt-6">
+              <table class="admin-table" id="admin-products-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-products-tbody">
+                  <!-- Injected rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ADMIN PANE 3: ORDERS MANAGEMENT -->
+          <div id="admin-pane-orders" class="admin-pane">
+            <div class="admin-pane-header flex-between">
+              <div>
+                <h1 class="text-2xl font-bold text-slate-100">Customer Orders Pipeline</h1>
+                <p class="text-xs text-slate-400">Update fulfillment status, track tracking codes, and print official invoices.</p>
+              </div>
+            </div>
+
+            <div class="table-responsive glassmorphism mt-6">
+              <table class="admin-table" id="admin-orders-table">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-orders-tbody">
+                  <!-- Injected orders -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ADMIN PANE 4: WARRANTIES -->
+          <div id="admin-pane-warranties" class="admin-pane">
+            <div class="admin-pane-header flex-between">
+              <div>
+                <h1 class="text-2xl font-bold text-slate-100">10-Year Warranty Claims & Registrations</h1>
+                <p class="text-xs text-slate-400">Verify genuine hardware serial numbers and approve warranty claims.</p>
+              </div>
+            </div>
+
+            <div class="table-responsive glassmorphism mt-6">
+              <table class="admin-table" id="admin-warranties-table">
+                <thead>
+                  <tr>
+                    <th>Reg ID</th>
+                    <th>Hardware Model</th>
+                    <th>Serial Number</th>
+                    <th>Owner</th>
+                    <th>Purchase Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-warranties-tbody">
+                  <!-- Injected warranty registrations -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ADMIN PANE 5: INVENTORY -->
+          <div id="admin-pane-inventory" class="admin-pane">
+            <div class="admin-pane-header flex-between">
+              <div>
+                <h1 class="text-2xl font-bold text-slate-100">Inventory & Stock Alerts</h1>
+                <p class="text-xs text-slate-400">Automated restock threshold triggers and warehouse levels.</p>
+              </div>
+            </div>
+
+            <div class="inventory-summary-cards mt-6">
+              <!-- Cards for In Stock, Low Stock, Restock Needed -->
+              <div id="admin-inventory-list">
+                <!-- Injected cards -->
+              </div>
+            </div>
+          </div>
+
+          <!-- ADMIN PANE 6: REVIEWS MODERATION -->
+          <div id="admin-pane-reviews" class="admin-pane">
+            <div class="admin-pane-header flex-between">
+              <div>
+                <h1 class="text-2xl font-bold text-slate-100">Creator Reviews Moderation</h1>
+                <p class="text-xs text-slate-400">Approve, feature or flag user-submitted reviews.</p>
+              </div>
+            </div>
+
+            <div class="table-responsive glassmorphism mt-6">
+              <table class="admin-table" id="admin-reviews-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Author</th>
+                    <th>Rating</th>
+                    <th>Headline & Text</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-reviews-tbody">
+                  <!-- Injected reviews -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ADMIN PANE 7: EXPORT REPORTS -->
+          <div id="admin-pane-reports" class="admin-pane">
+            <div class="admin-pane-header flex-between">
+              <div>
+                <h1 class="text-2xl font-bold text-slate-100">Export Store Data & Financial Reports</h1>
+                <p class="text-xs text-slate-400">Generate instantly downloadable CSV and JSON data packages.</p>
+              </div>
+            </div>
+
+            <div class="reports-grid mt-6">
+              <div class="report-card glassmorphism">
+                <i class="fa-solid fa-file-csv report-icon gold"></i>
+                <h3 class="font-bold text-slate-200 mt-2">Product Catalog Manifest (CSV)</h3>
+                <p class="text-xs text-slate-400 mb-4">Complete database of all gear, specs, SKU numbers, and prices.</p>
+                <button id="export-products-csv-btn" class="btn btn-outline btn-sm w-full"><i class="fa-solid fa-download"></i> Download Products CSV</button>
+              </div>
+
+              <div class="report-card glassmorphism">
+                <i class="fa-solid fa-file-invoice report-icon blue"></i>
+                <h3 class="font-bold text-slate-200 mt-2">Orders & Sales Ledger (JSON)</h3>
+                <p class="text-xs text-slate-400 mb-4">Full transaction logs, customer items, shipping tracking, and totals.</p>
+                <button id="export-orders-json-btn" class="btn btn-outline btn-sm w-full"><i class="fa-solid fa-download"></i> Download Orders JSON</button>
+              </div>
+
+              <div class="report-card glassmorphism">
+                <i class="fa-solid fa-certificate report-icon purple"></i>
+                <h3 class="font-bold text-slate-200 mt-2">10-Year Warranty Database (CSV)</h3>
+                <p class="text-xs text-slate-400 mb-4">Official serial number registry and customer ownership records.</p>
+                <button id="export-warranties-csv-btn" class="btn btn-outline btn-sm w-full"><i class="fa-solid fa-download"></i> Download Warranties CSV</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADMIN PANE 8: SETTINGS -->
+          <div id="admin-pane-settings" class="admin-pane">
+            <div class="admin-pane-header">
+              <h1 class="text-2xl font-bold text-slate-100">Store Global Configuration</h1>
+              <p class="text-xs text-slate-400">Manage currencies, warranty terms, and automated studio sound processing parameters.</p>
+            </div>
+
+            <div class="admin-settings-card glassmorphism mt-6">
+              <form id="admin-settings-form">
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label>Store Currency</label>
+                    <select id="admin-set-currency" class="form-input">
+                      <option value="USD">USD ($)</option>
+                      <option value="EUR">EUR (€)</option>
+                      <option value="GBP">GBP (£)</option>
+                      <option value="AUD">AUD ($)</option>
+                    </select>
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Free Express Shipping Threshold ($)</label>
+                    <input type="number" id="admin-set-shipping" value="150" class="form-input">
+                  </div>
+                </div>
+
+                <div class="form-row mt-4">
+                  <div class="form-group flex-1">
+                    <label>Tax Rate (%)</label>
+                    <input type="number" id="admin-set-tax" value="8.5" step="0.1" class="form-input">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Low Stock Warning Level</label>
+                    <input type="number" id="admin-set-lowstock" value="5" class="form-input">
+                  </div>
+                </div>
+
+                <div class="form-group mt-4">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" id="admin-set-autowarranty" checked>
+                    <span class="checkmark"></span>
+                    <span>Automatically auto-approve valid format RØDE serial numbers</span>
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-gold btn-md mt-6">
+                  <i class="fa-solid fa-floppy-disk"></i> Save Admin Configuration
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- MODALS: AUTHENTICATION (LOGIN, REGISTER, FORGOT PWD) -->
+  <!-- ======================================================== -->
+  <div id="auth-modal" class="modal-overlay hidden">
+    <div class="auth-modal-card glassmorphism">
+      <div class="modal-header flex-between">
+        <div class="flex items-center gap-2">
+          <div class="logo-circle-gold-sm"></div>
+          <span class="font-bold text-slate-100">RØDE STUDIO ACCOUNT</span>
+        </div>
+        <button id="close-auth-modal-btn" class="modal-close-icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Auth Tabs (Login / Register / Forgot) -->
+      <div class="auth-tabs-row mt-4">
+        <button class="auth-tab-btn active" data-auth-tab="login">Sign In</button>
+        <button class="auth-tab-btn" data-auth-tab="register">Register</button>
+        <button class="auth-tab-btn" data-auth-tab="forgot">Reset Password</button>
+      </div>
+
+      <!-- FORM 1: LOGIN -->
+      <form id="auth-login-form" class="auth-form-pane active mt-4">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="login-email" required value="alex.vance@studio.audio" class="form-input">
+        </div>
+        <div class="form-group mt-3">
+          <label>Password</label>
+          <input type="password" id="login-password" required value="••••••••" class="form-input">
+        </div>
+
+        <!-- Quick Demo Role Sign-ins -->
+        <div class="demo-quick-auth mt-4">
+          <span class="text-xs text-slate-400 block mb-2">Quick 1-Click Demo Logins:</span>
+          <div class="flex gap-2">
+            <button type="button" class="btn btn-outline btn-xs flex-1 quick-login-role" data-role="customer">
+              <i class="fa-solid fa-user"></i> Alex (Customer)
+            </button>
+            <button type="button" class="btn btn-outline btn-xs flex-1 quick-login-role" data-role="admin">
+              <i class="fa-solid fa-shield text-gold"></i> Admin (Sydney HQ)
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-md w-full mt-6">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Studio Account
+        </button>
+      </form>
+
+      <!-- FORM 2: REGISTER -->
+      <form id="auth-register-form" class="auth-form-pane mt-4">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="reg-name" required placeholder="e.g. Jordan Miller" class="form-input">
+        </div>
+        <div class="form-group mt-3">
+          <label>Email Address</label>
+          <input type="email" id="reg-email" required placeholder="jordan@podcast.fm" class="form-input">
+        </div>
+        <div class="form-group mt-3">
+          <label>Password</label>
+          <input type="password" id="reg-password" required placeholder="Minimum 8 characters" class="form-input">
+        </div>
+        <button type="submit" class="btn btn-gold btn-md w-full mt-6">
+          <i class="fa-solid fa-user-plus"></i> Create RØDE Creator Account
+        </button>
+      </form>
+
+      <!-- FORM 3: FORGOT PASSWORD -->
+      <form id="auth-forgot-form" class="auth-form-pane mt-4">
+        <p class="text-xs text-slate-300 mb-3">Enter your registered account email and we'll transmit a secure reset link.</p>
+        <div class="form-group">
+          <label>Account Email</label>
+          <input type="email" id="forgot-email" required placeholder="your.email@studio.audio" class="form-input">
+        </div>
+        <button type="submit" class="btn btn-gold btn-md w-full mt-6">
+          <i class="fa-solid fa-paper-plane"></i> Send Password Reset Instructions
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER QUICK CART DRAWER -->
+  <div id="cart-drawer-overlay" class="drawer-overlay hidden">
+    <div class="cart-drawer glassmorphism">
+      <div class="drawer-header flex-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-bag-shopping text-gold"></i>
+          <h3 class="font-bold text-slate-100">Shopping Cart (<span id="drawer-cart-count">0</span>)</h3>
+        </div>
+        <button id="close-cart-drawer-btn" class="modal-close-icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div id="drawer-cart-items" class="drawer-cart-list">
+        <!-- Injected drawer items -->
+      </div>
+
+      <div class="drawer-footer">
+        <div class="flex-between text-base font-bold text-slate-100 mb-4">
+          <span>Subtotal:</span>
+          <span id="drawer-cart-subtotal" class="text-gold font-mono">$0.00</span>
+        </div>
+        <div class="flex gap-2">
+          <a href="#customer-cart" class="btn btn-outline flex-1" id="drawer-view-cart-btn" data-nav="customer-cart">View Full Cart</a>
+          <a href="#customer-checkout" class="btn btn-gold flex-1" id="drawer-checkout-btn" data-nav="customer-checkout">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK COMPARISON SLIDE-UP DRAWER -->
+  <div id="comparison-drawer" class="compare-float-drawer collapsed">
+    <div class="compare-float-header flex-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-code-compare text-gold"></i>
+        <span class="font-bold text-sm text-slate-100">Gear Comparison (<span id="float-compare-count">0</span>/4)</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#compare" class="btn btn-gold btn-xs" data-nav="compare">Open Shootout Studio</a>
+        <button id="close-compare-drawer-btn" class="text-xs text-slate-400 hover:text-white"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+    <div id="float-compare-items" class="compare-float-items">
+      <!-- Injected comparison chips -->
+    </div>
+  </div>
+
+  <!-- PRINTABLE INVOICE MODAL -->
+  <div id="invoice-modal" class="modal-overlay hidden">
+    <div class="invoice-modal-card glassmorphism">
+      <div class="flex-between mb-4 no-print">
+        <h3 class="font-bold text-slate-100"><i class="fa-solid fa-file-invoice text-gold"></i> Official Tax Invoice</h3>
+        <div class="flex gap-2">
+          <button id="print-invoice-btn" class="btn btn-outline btn-sm"><i class="fa-solid fa-print"></i> Print / PDF</button>
+          <button id="close-invoice-modal-btn" class="modal-close-icon"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div id="invoice-modal-content" class="invoice-sheet">
+        <!-- Rendered invoice details -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="toast-stack"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-col brand-col">
+        <div class="brand-logo mb-4">
+          <div class="logo-symbol">
+            <span class="logo-letter">R</span>
+            <span class="logo-circle-gold"></span>
+          </div>
+          <div class="logo-text-group">
+            <span class="brand-name">RØDE</span>
+            <span class="brand-sub">STUDIO SUITE</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          RØDE is a premium Australian manufacturer of audio equipment, microphones, studio consoles, and wireless tools for creators worldwide.
+        </p>
+        <div class="social-links mt-4">
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-spotify"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Flagship Gear</h4>
+        <ul>
+          <li><a href="#shop" data-nav="shop">NT1 5th Generation</a></li>
+          <li><a href="#shop" data-nav="shop">Wireless PRO System</a></li>
+          <li><a href="#shop" data-nav="shop">RØDECaster Pro II</a></li>
+          <li><a href="#shop" data-nav="shop">NTH-100 Headphones</a></li>
+          <li><a href="#shop" data-nav="shop">PodMic USB</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Acoustic Guides & Tools</h4>
+        <ul>
+          <li><a href="#guides" data-nav="guides">Microphone Shootout Studio</a></li>
+          <li><a href="#guides" data-nav="guides">Noise Cancellation Lab</a></li>
+          <li><a href="#guides" data-nav="guides">Podcasting 101 Setup Guide</a></li>
+          <li><a href="#guides" data-nav="guides">Polar Pattern Directivity Guide</a></li>
+          <li><a href="#customer-warranty" data-nav="customer-warranty">10-Year Warranty Registration</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer & Studio Support</h4>
+        <ul>
+          <li><a href="#customer-orders" data-nav="customer-orders">Track Orders & Shipments</a></li>
+          <li><a href="#customer-invoices" data-nav="customer-invoices">Invoices & Tax Receipts</a></li>
+          <li><a href="#customer-warranty" data-nav="customer-warranty">Warranty Certificate Lookup</a></li>
+          <li><a href="#admin-dashboard" data-nav="admin-dashboard" class="text-gold">Admin Management Console</a></li>
+          <li><a href="https://rode.com/en-int" target="_blank" rel="noopener">RØDE Official International Site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container flex-between wrap-mobile">
+        <p class="text-xs text-slate-500">© 2026 Freedman Electronics Pty Ltd / RØDE Microphones. Precision engineered in Sydney, Australia.</p>
+        <div class="flex gap-4 text-xs text-slate-400">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Warranty Terms (10 Years)</a>
+          <a href="#">Global Compliance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -244,6 +244,40 @@
   color: var(--gold-400);
 }
 
+/* Orders Filter Chips (High Contrast) */
+.order-filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: #cbd5e1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-chip:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-chip.active {
+  background: var(--gold-500) !important;
+  border-color: var(--gold-500) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+}
+
 /* Orders Timeline */
 .orders-timeline-wrap {
   display: flex;
@@ -376,6 +410,19 @@
 .cert-expiry {
   font-size: 0.75rem;
   color: var(--text-secondary);
+}
+
+/* Invoices & Receipts Table Wrapper */
+.invoices-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+}
+.invoices-table-wrap .admin-table {
+  min-width: 540px;
+  width: 100%;
 }
 
 /* Printable Tax Invoice Modal */
@@ -696,5 +743,145 @@
   }
   .cart-page-layout, .checkout-layout, .warranty-portal-layout {
     grid-template-columns: 1fr;
+  }
+  .portal-header.flex-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Cart & Portal Cards */
+  .cart-item-row {
+    grid-template-columns: 60px 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  .cart-item-img {
+    width: 60px;
+    height: 60px;
+  }
+  .cart-items-card, .cart-summary-card, .portal-card {
+    padding: 1.15rem 0.85rem;
+  }
+  .account-tabs-list {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .acc-tab-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+  .admin-modal-card {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Form Rows (Stack inputs vertically) */
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Order Record Cards (Mobile 360) */
+  .order-record-card {
+    padding: 1rem 0.85rem;
+  }
+  .order-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+  .order-header-row > div:last-child {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .order-items-mini-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .order-mini-item {
+    width: 100%;
+  }
+  .order-record-card .flex-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Checkout Actions */
+  .checkout-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .checkout-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Invoices & Table cells */
+  .admin-table th, .admin-table td {
+    padding: 0.65rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* Wishlist Button */
+  #move-all-wishlist-cart-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Warranty Form & Certificates (Mobile 360) */
+  #warranty-reg-form .btn {
+    width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+    padding: 0.75rem 0.85rem;
+    font-size: 0.8rem;
+    text-align: center;
+    justify-content: center;
+  }
+  .warranty-certificate-card {
+    padding: 1rem 0.85rem;
+  }
+  .cert-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .cert-title {
+    font-size: 0.88rem;
+    word-break: break-word;
+  }
+  .cert-serial {
+    word-break: break-all;
+    font-size: 0.75rem;
+  }
+  .cert-expiry {
+    font-size: 0.7rem;
+  }
+
+  /* Wishlist Grid (Mobile 360) */
+  #customer-wishlist-grid.products-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  #customer-wishlist-grid .product-card {
+    padding: 1rem 0.85rem;
+  }
+  #customer-wishlist-grid .product-card-footer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  #customer-wishlist-grid .product-card-footer .flex {
+    width: 100%;
+    justify-content: flex-end;
   }
 }

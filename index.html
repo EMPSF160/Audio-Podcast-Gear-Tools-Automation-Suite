@@ -6,6 +6,10 @@
   <title>RØDE International | Professional Audio, Microphones & Studio Automation</title>
   <meta name="description" content="Precision audio gear for podcasters, musicians, streamers, and broadcast creators. Flagship microphones, audio interfaces, podcast studios, and smart studio tools.">
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,9 +176,12 @@
   <!-- Audio Studio Live Soundboard / Visualizer Drawer -->
   <aside id="audio-studio-drawer" class="audio-studio-bar collapsed">
     <div class="studio-bar-inner">
-      <div class="studio-info">
-        <div class="studio-badge"><i class="fa-solid fa-waveform-lines"></i> RØDE ACOUSTIC ENGINE</div>
-        <span id="studio-active-mic" class="studio-mic-name">Active Sound: NT1 5th Gen (Cardioid / Voice Clarity)</span>
+      <div class="studio-info-row">
+        <div class="studio-info">
+          <div class="studio-badge"><i class="fa-solid fa-waveform-lines"></i> RØDE ACOUSTIC ENGINE</div>
+          <span id="studio-active-mic" class="studio-mic-name">Active Sound: NT1 5th Gen (Cardioid / Voice Clarity)</span>
+        </div>
+        <button id="close-studio-drawer-mobile" class="studio-close-btn studio-close-mobile" title="Hide Studio Bar"><i class="fa-solid fa-xmark"></i></button>
       </div>
       
       <!-- Visualizer Canvas -->
@@ -186,8 +193,8 @@
       <div class="studio-controls">
         <button id="play-sample-btn" class="studio-btn play"><i class="fa-solid fa-play"></i> Test Audio Tone</button>
         <div class="studio-eq-sliders">
-          <label>Gain: <input type="range" id="studio-gain-slider" min="0" max="100" value="75"></label>
-          <label>Filter: 
+          <label><span>Gain:</span> <input type="range" id="studio-gain-slider" min="0" max="100" value="75"></label>
+          <label><span>Filter:</span> 
             <select id="studio-filter-select" class="studio-select">
               <option value="flat">Warm Studio (Flat)</option>
               <option value="clarity">Vocal Clarity Boost</option>
@@ -196,7 +203,7 @@
             </select>
           </label>
         </div>
-        <button id="close-studio-drawer" class="studio-close-btn" title="Hide Studio Bar"><i class="fa-solid fa-chevron-down"></i></button>
+        <button id="close-studio-drawer" class="studio-close-btn studio-close-desktop" title="Hide Studio Bar"><i class="fa-solid fa-chevron-down"></i></button>
       </div>
     </div>
   </aside>
@@ -408,12 +415,20 @@
         </div>
       </div>
 
+      <!-- Mobile/Tablet Filter Drawer Backdrop -->
+      <div id="filter-drawer-backdrop" class="drawer-backdrop hidden"></div>
+
       <div class="container shop-layout">
         <!-- Sidebar Filters -->
-        <aside class="shop-sidebar glassmorphism">
+        <aside class="shop-sidebar glassmorphism" id="shop-sidebar-drawer">
           <div class="sidebar-header flex-between">
             <h3 class="sidebar-title"><i class="fa-solid fa-filter text-gold"></i> Filters</h3>
-            <button id="reset-filters-btn" class="text-xs text-gold hover:underline">Reset All</button>
+            <div class="flex items-center gap-2">
+              <button id="reset-filters-btn" class="text-xs text-gold hover:underline">Reset All</button>
+              <button id="close-filter-drawer-btn" class="close-filter-btn" title="Close Filters" aria-label="Close Filters">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Category Filter -->
@@ -525,6 +540,13 @@
               </label>
             </div>
           </div>
+
+          <!-- Mobile/Tablet Filter Footer -->
+          <div class="mobile-filter-footer">
+            <button id="apply-filters-btn" class="btn btn-gold w-full mt-4">
+              <i class="fa-solid fa-check"></i> Apply Filters
+            </button>
+          </div>
         </aside>
 
         <!-- Product Listing Grid Content -->
@@ -532,6 +554,12 @@
           <!-- Top Bar with Search, Count, Sort, Grid toggles -->
           <div class="shop-toolbar glassmorphism">
             <div class="toolbar-left">
+              <!-- Mobile/Tablet Filter Trigger Button -->
+              <button id="shop-filter-toggle-btn" class="btn btn-outline btn-sm mobile-filter-btn" title="Open Product Filters">
+                <i class="fa-solid fa-filter text-gold"></i>
+                <span>Filters</span>
+                <span id="mobile-filter-count-badge" class="filter-count-badge hidden">0</span>
+              </button>
               <div class="search-inline">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="shop-search-input" placeholder="Search catalog...">
@@ -1903,11 +1931,11 @@
     <div class="compare-float-header flex-between">
       <div class="flex items-center gap-2">
         <i class="fa-solid fa-code-compare text-gold"></i>
-        <span class="font-bold text-sm text-slate-100">Gear Comparison (<span id="float-compare-count">0</span>/4)</span>
+        <span class="font-bold text-sm text-slate-100 compare-title-text">Gear Comparison (<span id="float-compare-count">0</span>/4)</span>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="#compare" class="btn btn-gold btn-xs" data-nav="compare">Open Shootout Studio</a>
-        <button id="close-compare-drawer-btn" class="text-xs text-slate-400 hover:text-white"><i class="fa-solid fa-chevron-down"></i></button>
+      <div class="flex items-center gap-2">
+        <a href="#compare" class="btn btn-gold btn-xs compare-shootout-btn" data-nav="compare">Open Shootout Studio</a>
+        <button id="close-compare-drawer-btn" class="compare-close-btn" title="Close Comparison Bar"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
     <div id="float-compare-items" class="compare-float-items">

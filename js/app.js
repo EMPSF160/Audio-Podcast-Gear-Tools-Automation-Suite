@@ -32,6 +32,7 @@ class RodeApp {
     this.bindPdpEvents();
     this.bindGuidesEvents();
     this.bindAudioStudioDrawer();
+    this.bindComparisonDrawer();
     this.bindSearchModal();
     this.handleRoute();
 
@@ -75,10 +76,35 @@ class RodeApp {
 
     // Mobile menu toggle
     const mobileToggle = document.getElementById("mobile-menu-toggle");
-    if (mobileToggle) {
-      mobileToggle.addEventListener("click", () => {
-        const nav = document.querySelector(".nav-links");
-        if (nav) nav.classList.toggle("mobile-open");
+    const navLinks = document.querySelector(".nav-links");
+    if (mobileToggle && navLinks) {
+      mobileToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = navLinks.classList.toggle("mobile-open");
+        const icon = mobileToggle.querySelector("i");
+        if (icon) {
+          icon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+        }
+      });
+
+      // Close mobile menu when clicking any nav link
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("mobile-open");
+          const icon = mobileToggle.querySelector("i");
+          if (icon) icon.className = "fa-solid fa-bars";
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
+          if (navLinks.classList.contains("mobile-open")) {
+            navLinks.classList.remove("mobile-open");
+            const icon = mobileToggle.querySelector("i");
+            if (icon) icon.className = "fa-solid fa-bars";
+          }
+        }
       });
     }
   }
@@ -559,6 +585,28 @@ class RodeApp {
       });
     }
 
+    // Mobile/Tablet Filter Drawer Toggle
+    const filterToggleBtn = document.getElementById("shop-filter-toggle-btn");
+    const filterCloseBtn = document.getElementById("close-filter-drawer-btn");
+    const filterApplyBtn = document.getElementById("apply-filters-btn");
+    const sidebarDrawer = document.getElementById("shop-sidebar-drawer");
+    const filterBackdrop = document.getElementById("filter-drawer-backdrop");
+
+    const openFilterDrawer = () => {
+      if (sidebarDrawer) sidebarDrawer.classList.add("filter-drawer-open");
+      if (filterBackdrop) filterBackdrop.classList.remove("hidden");
+    };
+
+    const closeFilterDrawer = () => {
+      if (sidebarDrawer) sidebarDrawer.classList.remove("filter-drawer-open");
+      if (filterBackdrop) filterBackdrop.classList.add("hidden");
+    };
+
+    if (filterToggleBtn) filterToggleBtn.addEventListener("click", openFilterDrawer);
+    if (filterCloseBtn) filterCloseBtn.addEventListener("click", closeFilterDrawer);
+    if (filterApplyBtn) filterApplyBtn.addEventListener("click", closeFilterDrawer);
+    if (filterBackdrop) filterBackdrop.addEventListener("click", closeFilterDrawer);
+
     // Reset buttons
     const resetBtn = document.getElementById("reset-filters-btn");
     const clearAllBtn = document.getElementById("clear-all-filters-btn");
@@ -643,6 +691,21 @@ class RodeApp {
     // Render Count
     const countLabel = document.getElementById("products-count-label");
     if (countLabel) countLabel.innerHTML = `Showing <strong>${prods.length}</strong> gear systems`;
+
+    // Active filters count for mobile/tab badge
+    let activeFilterCount = 0;
+    if (f.search) activeFilterCount++;
+    if (!f.categories.includes("all")) activeFilterCount += f.categories.length;
+    if (f.connectivity.length) activeFilterCount += f.connectivity.length;
+    if (f.archetypes.length) activeFilterCount += f.archetypes.length;
+    if (f.maxPrice < 1000) activeFilterCount++;
+    if (f.features.length) activeFilterCount += f.features.length;
+
+    const filterBadge = document.getElementById("mobile-filter-count-badge");
+    if (filterBadge) {
+      filterBadge.textContent = activeFilterCount;
+      filterBadge.classList.toggle("hidden", activeFilterCount === 0);
+    }
 
     // Render Grid
     const grid = document.getElementById("shop-products-grid");
@@ -1061,6 +1124,7 @@ class RodeApp {
     const toggleBtn = document.getElementById("global-audio-toggle");
     const drawer = document.getElementById("audio-studio-drawer");
     const closeBtn = document.getElementById("close-studio-drawer");
+    const closeMobileBtn = document.getElementById("close-studio-drawer-mobile");
     const playBtn = document.getElementById("play-sample-btn");
 
     if (toggleBtn && drawer) {
@@ -1068,6 +1132,9 @@ class RodeApp {
     }
     if (closeBtn && drawer) {
       closeBtn.addEventListener("click", () => drawer.classList.add("collapsed"));
+    }
+    if (closeMobileBtn && drawer) {
+      closeMobileBtn.addEventListener("click", () => drawer.classList.add("collapsed"));
     }
 
     if (playBtn) {
@@ -1089,6 +1156,16 @@ class RodeApp {
   }
 
   // ================= COMPARISON FLOAT DRAWER =================
+  bindComparisonDrawer() {
+    const closeBtn = document.getElementById("close-compare-drawer-btn");
+    const drawer = document.getElementById("comparison-drawer");
+    if (closeBtn && drawer) {
+      closeBtn.addEventListener("click", () => {
+        drawer.classList.add("closed");
+      });
+    }
+  }
+
   renderComparisonDrawer() {
     const list = store.getCompareList();
     const countBadge = document.getElementById("compare-badge");
@@ -1104,6 +1181,9 @@ class RodeApp {
 
     if (floatDrawer) {
       floatDrawer.classList.toggle("collapsed", list.length === 0);
+      if (list.length > 0) {
+        floatDrawer.classList.remove("closed");
+      }
     }
 
     if (floatItems) {
@@ -1196,6 +1276,13 @@ class RodeApp {
       window.showToast(res.message, "error");
     } else {
       window.showToast(res.added ? "Added to Shootout Comparison" : "Removed from Shootout");
+      if (res.added) {
+        const floatDrawer = document.getElementById("comparison-drawer");
+        if (floatDrawer) {
+          floatDrawer.classList.remove("closed");
+          floatDrawer.classList.remove("collapsed");
+        }
+      }
     }
   }
 

@@ -6,6 +6,10 @@
   <title>RØDE International | Professional Audio, Microphones & Studio Automation</title>
   <meta name="description" content="Precision audio gear for podcasters, musicians, streamers, and broadcast creators. Flagship microphones, audio interfaces, podcast studios, and smart studio tools.">
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1115,14 +1119,100 @@ img {
    RESPONSIVE MEDIA QUERIES
    ========================================================== */
 @media (max-width: 1024px) {
+  /* Header & Nav Tablet 1024 View (No Wrap, Sleek Single Row) */
+  .site-header .container {
+    padding: 0 1rem;
+  }
+  .brand-logo {
+    gap: 0.5rem;
+  }
+  .brand-name {
+    font-size: 1.18rem;
+  }
+  .brand-sub {
+    font-size: 0.55rem;
+    letter-spacing: 0.16em;
+  }
+  .nav-links {
+    gap: 0.25rem;
+  }
+  .nav-link {
+    padding: 0.45rem 0.55rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    gap: 0.35rem;
+  }
+  .header-actions {
+    gap: 0.35rem;
+  }
+  .audio-pulse-btn {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+  .cart-btn {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .user-btn {
+    padding: 0.3rem 0.55rem 0.3rem 0.3rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .user-name {
+    font-size: 0.78rem;
+  }
+  .header-icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .top-bar-text {
+    display: none;
+  }
+
   .hero-container {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .hero-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 720px;
+  }
+  .hero-badge {
+    margin-left: auto;
+    margin-right: auto;
   }
   .hero-title {
+    text-align: center;
     font-size: 2.8rem;
+  }
+  .hero-subtitle {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-cta-group {
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+    text-align: center;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-stat-item {
+    align-items: center;
+    text-align: center;
   }
   .studio-banner-card {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
   .footer-container {
     grid-template-columns: repeat(2, 1fr);
@@ -1130,11 +1220,54 @@ img {
 }
 
 @media (max-width: 768px) {
+  .site-header {
+    height: auto;
+  }
+  .header-container {
+    height: 60px;
+    padding: 0 1rem;
+  }
   .nav-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(11, 14, 20, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 2px solid var(--border-gold);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    padding: 1rem 1.25rem;
+    gap: 0.5rem;
+    z-index: 999;
+  }
+  .nav-links.mobile-open {
+    display: flex;
+    animation: mobileNavSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .nav-link {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.92rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-glass);
   }
   .mobile-toggle-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .top-bar-text {
+    display: none;
+  }
+  .top-bar-inner {
+    padding: 0 0.75rem;
+  }
+  .top-bar-left, .top-bar-right {
+    gap: 0.5rem;
   }
   .hero-title {
     font-size: 2.2rem;
@@ -1142,14 +1275,192 @@ img {
   .hero-stats {
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
   }
-  .wrap-mobile {
+  .section-header.flex-between {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
+  .category-tabs {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    padding: 0.3rem 0.4rem;
+  }
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-tab-btn {
+    flex-shrink: 0;
+  }
+  .wrap-mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
   .footer-container {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .audio-pulse-btn .audio-label {
+    display: none;
+  }
+  .audio-pulse-btn {
+    padding: 0.4rem 0.55rem;
+  }
+  .cart-btn .cart-label {
+    display: none;
+  }
+  .cart-btn {
+    padding: 0.45rem 0.65rem;
+  }
+  .user-btn .user-name,
+  .user-btn .user-caret {
+    display: none;
+  }
+  .user-btn {
+    padding: 0.25rem;
+  }
+  .demo-role-pill .text-slate-400 {
+    display: none;
+  }
+  .badge-role {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.45rem;
+  }
+  .header-actions {
+    gap: 0.35rem;
+  }
+  .header-icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.85rem;
+  }
+  .header-container {
+    padding: 0 0.5rem;
+  }
+  .brand-name {
+    font-size: 1.15rem;
+  }
+  .brand-sub {
+    font-size: 0.52rem;
+    letter-spacing: 0.14em;
+  }
+  .brand-logo {
+    gap: 0.45rem;
+  }
+  .logo-symbol {
+    width: 30px;
+    height: 30px;
+  }
+  .logo-letter {
+    font-size: 1.05rem;
+  }
+  .header-actions {
+    gap: 0.2rem;
+  }
+  .header-icon-btn, .mobile-toggle-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.82rem;
+  }
+  .audio-pulse-btn {
+    padding: 0.35rem 0.45rem;
+  }
+  .hero-title {
+    font-size: 1.85rem;
+    line-height: 1.15;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.25rem;
+  }
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    width: 100%;
+  }
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .category-card {
+    padding: 1.1rem;
+  }
+  .studio-banner-card {
+    padding: 1.5rem 0.85rem;
+    gap: 1.25rem;
+  }
+  .banner-title {
+    font-size: 1.35rem;
+  }
+  .banner-desc {
+    font-size: 0.85rem;
+  }
+  .kit-chip {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.75rem;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .warranty-seal {
+    width: 46px;
+    height: 46px;
+    font-size: 0.95rem;
+  }
+  .warranty-hero-bar h3 {
+    font-size: 1.05rem;
+  }
+  .badge-gold {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+  }
+  /* Fixed position profile dropdown for mobile 360 */
+  .user-dropdown {
+    position: fixed;
+    top: 64px;
+    right: 8px;
+    left: auto;
+    width: calc(100vw - 16px);
+    max-width: 280px;
+    z-index: 1200;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@keyframes mobileNavSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -2709,6 +3020,7 @@ img {
   bottom: 0;
   right: 2rem;
   width: 380px;
+  max-width: calc(100vw - 1.5rem);
   background: #11141c;
   border: 1px solid var(--border-gold);
   border-bottom: none;
@@ -2716,17 +3028,46 @@ img {
   z-index: 110;
   padding: 0.85rem 1.25rem;
   box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.8);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
 }
 
 .compare-float-drawer.collapsed {
   transform: translateY(calc(100% - 44px));
 }
 
+.compare-float-drawer.closed {
+  transform: translateY(115%);
+  pointer-events: none;
+}
+
+.compare-close-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: var(--transition);
+}
+
+.compare-close-btn:hover {
+  background: rgba(244, 63, 94, 0.2);
+  color: var(--accent-red);
+}
+
 .compare-float-items {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.75rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.compare-float-items::-webkit-scrollbar {
+  display: none;
 }
 
 .float-item-thumb {
@@ -2736,6 +3077,7 @@ img {
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 /* Toast Notifications */
@@ -2764,6 +3106,388 @@ img {
   font-weight: 600;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
   animation: slideToastIn 0.3s ease forwards;
+}
+
+/* Mobile & Tablet Filter Drawer Styles */
+.mobile-filter-btn {
+  display: none;
+}
+
+.filter-count-badge {
+  background: var(--gold-500);
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full);
+}
+
+.close-filter-btn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.close-filter-btn:hover {
+  background: rgba(244, 63, 94, 0.2);
+  color: var(--accent-red);
+}
+
+.mobile-filter-footer {
+  display: none;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1090;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.drawer-backdrop:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Studio Drawer Extra Controls */
+.studio-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.studio-close-mobile {
+  display: none;
+}
+.studio-close-desktop {
+  display: flex;
+}
+
+/* ==========================================================
+   COMPONENTS RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
+   ========================================================== */
+@media (max-width: 1024px) {
+  /* Shop & Gear Page */
+  .shop-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 0 3rem;
+  }
+  .mobile-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    font-weight: 700;
+  }
+  .close-filter-btn {
+    display: flex;
+  }
+  .mobile-filter-footer {
+    display: block;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-glass);
+    margin-top: 1.5rem;
+  }
+  .shop-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    max-width: 86vw;
+    height: 100vh;
+    height: 100dvh;
+    background: #0d1017;
+    z-index: 1100;
+    overflow-y: auto;
+    padding: 1.5rem 1.25rem 2.5rem;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.9);
+    border-right: 1px solid var(--border-gold);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .shop-sidebar.filter-drawer-open {
+    transform: translateX(0);
+  }
+  .shop-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+  }
+  .toolbar-left, .toolbar-right {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .search-inline {
+    flex: 1;
+    min-width: 130px;
+  }
+  .search-inline input {
+    width: 100%;
+  }
+
+  /* Audio Guides & Simulator */
+  .acoustic-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+  .acoustic-toggle-group {
+    width: 100%;
+  }
+  #toggle-acoustic-sim-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .acoustic-lab-card {
+    padding: 1.75rem;
+  }
+
+  /* Studio Monitor Drawer */
+  .studio-bar-inner {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .visualizer-container {
+    order: 2;
+  }
+  .studio-controls {
+    order: 3;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  /* Product Details */
+  .pdp-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .pdp-specs-grid, .warranty-pane-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .pdp-nav-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Studio Monitor Bar Mobile */
+  .audio-studio-bar {
+    padding: 0.85rem 1rem;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .studio-close-mobile {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  .studio-close-desktop {
+    display: none;
+  }
+  .studio-bar-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+  .studio-info-row {
+    width: 100%;
+  }
+  .studio-info {
+    flex: 1;
+  }
+  .studio-mic-name {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+  .visualizer-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  #audio-visualizer-canvas {
+    width: 100%;
+    max-width: 100%;
+    height: 32px;
+  }
+  .studio-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .studio-btn.play {
+    width: 100%;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+  }
+  .studio-eq-sliders {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .studio-eq-sliders label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.78rem;
+  }
+  .studio-eq-sliders input[type="range"],
+  .studio-eq-sliders select {
+    flex: 1;
+    margin-left: 0.5rem;
+  }
+
+  /* Audio Guides & Simulator Mobile */
+  .acoustic-lab-card {
+    padding: 1.25rem 0.85rem;
+  }
+  .acoustic-controls-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .room-btn {
+    font-size: 0.78rem;
+    padding: 0.55rem 0.75rem;
+    word-break: break-word;
+  }
+  .dsp-pill {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.65rem;
+  }
+  .acoustic-canvas-wrap {
+    padding: 0.75rem 0.5rem;
+  }
+  .comparison-studio-wrap {
+    padding: 1.25rem 0.75rem;
+  }
+  .compare-full-table th:first-child, .compare-full-table td:first-child {
+    width: 140px;
+    padding: 0.65rem 0.5rem;
+    font-size: 0.78rem;
+  }
+  .compare-full-table th, .compare-full-table td {
+    padding: 0.65rem 0.5rem;
+    font-size: 0.78rem;
+  }
+  .guides-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Toast Notifications */
+  .toast-stack {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+  .toast-message {
+    font-size: 0.78rem;
+    padding: 0.65rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Floating Comparison Drawer on Phones */
+  .compare-float-drawer {
+    right: 0.65rem;
+    left: 0.65rem;
+    width: auto;
+    max-width: none;
+    padding: 0.65rem 0.75rem;
+  }
+  .compare-float-header {
+    gap: 0.4rem;
+  }
+  .compare-title-text {
+    font-size: 0.8rem;
+  }
+  .compare-shootout-btn {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.55rem;
+  }
+  .float-item-thumb {
+    width: 36px;
+    height: 36px;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile 360 View Adjustments */
+  .shop-sidebar {
+    width: 100vw;
+    max-width: 100vw;
+    padding: 1.25rem 1rem 2rem;
+  }
+  .catalog-grid, .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .toolbar-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .sort-label {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .sort-dropdown {
+    flex: 1;
+  }
+  .dsp-switches-grid {
+    grid-template-columns: 1fr;
+  }
+  .acoustic-header h2 {
+    font-size: 1.35rem;
+  }
+  .pdp-title {
+    font-size: 1.6rem;
+  }
+  .pdp-360-stage {
+    height: 280px;
+  }
+  .pdp-cta-row {
+    flex-direction: column;
+  }
+  .pdp-cta-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .pdp-main-stage, .pdp-info-panel {
+    padding: 1rem;
+  }
 }
 
 @keyframes slideToastIn {
@@ -3022,6 +3746,40 @@ img {
   color: var(--gold-400);
 }
 
+/* Orders Filter Chips (High Contrast) */
+.order-filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: #cbd5e1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-chip:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-chip.active {
+  background: var(--gold-500) !important;
+  border-color: var(--gold-500) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+}
+
 /* Orders Timeline */
 .orders-timeline-wrap {
   display: flex;
@@ -3154,6 +3912,19 @@ img {
 .cert-expiry {
   font-size: 0.75rem;
   color: var(--text-secondary);
+}
+
+/* Invoices & Receipts Table Wrapper */
+.invoices-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+}
+.invoices-table-wrap .admin-table {
+  min-width: 540px;
+  width: 100%;
 }
 
 /* Printable Tax Invoice Modal */
@@ -3475,6 +4246,146 @@ img {
   .cart-page-layout, .checkout-layout, .warranty-portal-layout {
     grid-template-columns: 1fr;
   }
+  .portal-header.flex-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Cart & Portal Cards */
+  .cart-item-row {
+    grid-template-columns: 60px 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  .cart-item-img {
+    width: 60px;
+    height: 60px;
+  }
+  .cart-items-card, .cart-summary-card, .portal-card {
+    padding: 1.15rem 0.85rem;
+  }
+  .account-tabs-list {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .acc-tab-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+  .admin-modal-card {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Form Rows (Stack inputs vertically) */
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Order Record Cards (Mobile 360) */
+  .order-record-card {
+    padding: 1rem 0.85rem;
+  }
+  .order-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+  .order-header-row > div:last-child {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .order-items-mini-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .order-mini-item {
+    width: 100%;
+  }
+  .order-record-card .flex-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Checkout Actions */
+  .checkout-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .checkout-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Invoices & Table cells */
+  .admin-table th, .admin-table td {
+    padding: 0.65rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* Wishlist Button */
+  #move-all-wishlist-cart-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Warranty Form & Certificates (Mobile 360) */
+  #warranty-reg-form .btn {
+    width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+    padding: 0.75rem 0.85rem;
+    font-size: 0.8rem;
+    text-align: center;
+    justify-content: center;
+  }
+  .warranty-certificate-card {
+    padding: 1rem 0.85rem;
+  }
+  .cert-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .cert-title {
+    font-size: 0.88rem;
+    word-break: break-word;
+  }
+  .cert-serial {
+    word-break: break-all;
+    font-size: 0.75rem;
+  }
+  .cert-expiry {
+    font-size: 0.7rem;
+  }
+
+  /* Wishlist Grid (Mobile 360) */
+  #customer-wishlist-grid.products-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  #customer-wishlist-grid .product-card {
+    padding: 1rem 0.85rem;
+  }
+  #customer-wishlist-grid .product-card-footer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  #customer-wishlist-grid .product-card-footer .flex {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }
 
   </style>
@@ -3629,9 +4540,12 @@ img {
   <!-- Audio Studio Live Soundboard / Visualizer Drawer -->
   <aside id="audio-studio-drawer" class="audio-studio-bar collapsed">
     <div class="studio-bar-inner">
-      <div class="studio-info">
-        <div class="studio-badge"><i class="fa-solid fa-waveform-lines"></i> RØDE ACOUSTIC ENGINE</div>
-        <span id="studio-active-mic" class="studio-mic-name">Active Sound: NT1 5th Gen (Cardioid / Voice Clarity)</span>
+      <div class="studio-info-row">
+        <div class="studio-info">
+          <div class="studio-badge"><i class="fa-solid fa-waveform-lines"></i> RØDE ACOUSTIC ENGINE</div>
+          <span id="studio-active-mic" class="studio-mic-name">Active Sound: NT1 5th Gen (Cardioid / Voice Clarity)</span>
+        </div>
+        <button id="close-studio-drawer-mobile" class="studio-close-btn studio-close-mobile" title="Hide Studio Bar"><i class="fa-solid fa-xmark"></i></button>
       </div>
       
       <!-- Visualizer Canvas -->
@@ -3643,8 +4557,8 @@ img {
       <div class="studio-controls">
         <button id="play-sample-btn" class="studio-btn play"><i class="fa-solid fa-play"></i> Test Audio Tone</button>
         <div class="studio-eq-sliders">
-          <label>Gain: <input type="range" id="studio-gain-slider" min="0" max="100" value="75"></label>
-          <label>Filter: 
+          <label><span>Gain:</span> <input type="range" id="studio-gain-slider" min="0" max="100" value="75"></label>
+          <label><span>Filter:</span> 
             <select id="studio-filter-select" class="studio-select">
               <option value="flat">Warm Studio (Flat)</option>
               <option value="clarity">Vocal Clarity Boost</option>
@@ -3653,7 +4567,7 @@ img {
             </select>
           </label>
         </div>
-        <button id="close-studio-drawer" class="studio-close-btn" title="Hide Studio Bar"><i class="fa-solid fa-chevron-down"></i></button>
+        <button id="close-studio-drawer" class="studio-close-btn studio-close-desktop" title="Hide Studio Bar"><i class="fa-solid fa-chevron-down"></i></button>
       </div>
     </div>
   </aside>
@@ -3865,12 +4779,20 @@ img {
         </div>
       </div>
 
+      <!-- Mobile/Tablet Filter Drawer Backdrop -->
+      <div id="filter-drawer-backdrop" class="drawer-backdrop hidden"></div>
+
       <div class="container shop-layout">
         <!-- Sidebar Filters -->
-        <aside class="shop-sidebar glassmorphism">
+        <aside class="shop-sidebar glassmorphism" id="shop-sidebar-drawer">
           <div class="sidebar-header flex-between">
             <h3 class="sidebar-title"><i class="fa-solid fa-filter text-gold"></i> Filters</h3>
-            <button id="reset-filters-btn" class="text-xs text-gold hover:underline">Reset All</button>
+            <div class="flex items-center gap-2">
+              <button id="reset-filters-btn" class="text-xs text-gold hover:underline">Reset All</button>
+              <button id="close-filter-drawer-btn" class="close-filter-btn" title="Close Filters" aria-label="Close Filters">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Category Filter -->
@@ -3982,6 +4904,13 @@ img {
               </label>
             </div>
           </div>
+
+          <!-- Mobile/Tablet Filter Footer -->
+          <div class="mobile-filter-footer">
+            <button id="apply-filters-btn" class="btn btn-gold w-full mt-4">
+              <i class="fa-solid fa-check"></i> Apply Filters
+            </button>
+          </div>
         </aside>
 
         <!-- Product Listing Grid Content -->
@@ -3989,6 +4918,12 @@ img {
           <!-- Top Bar with Search, Count, Sort, Grid toggles -->
           <div class="shop-toolbar glassmorphism">
             <div class="toolbar-left">
+              <!-- Mobile/Tablet Filter Trigger Button -->
+              <button id="shop-filter-toggle-btn" class="btn btn-outline btn-sm mobile-filter-btn" title="Open Product Filters">
+                <i class="fa-solid fa-filter text-gold"></i>
+                <span>Filters</span>
+                <span id="mobile-filter-count-badge" class="filter-count-badge hidden">0</span>
+              </button>
               <div class="search-inline">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="shop-search-input" placeholder="Search catalog...">
@@ -5360,11 +6295,11 @@ img {
     <div class="compare-float-header flex-between">
       <div class="flex items-center gap-2">
         <i class="fa-solid fa-code-compare text-gold"></i>
-        <span class="font-bold text-sm text-slate-100">Gear Comparison (<span id="float-compare-count">0</span>/4)</span>
+        <span class="font-bold text-sm text-slate-100 compare-title-text">Gear Comparison (<span id="float-compare-count">0</span>/4)</span>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="#compare" class="btn btn-gold btn-xs" data-nav="compare">Open Shootout Studio</a>
-        <button id="close-compare-drawer-btn" class="text-xs text-slate-400 hover:text-white"><i class="fa-solid fa-chevron-down"></i></button>
+      <div class="flex items-center gap-2">
+        <a href="#compare" class="btn btn-gold btn-xs compare-shootout-btn" data-nav="compare">Open Shootout Studio</a>
+        <button id="close-compare-drawer-btn" class="compare-close-btn" title="Close Comparison Bar"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
     <div id="float-compare-items" class="compare-float-items">
@@ -7860,6 +8795,7 @@ class RodeApp {
     this.bindPdpEvents();
     this.bindGuidesEvents();
     this.bindAudioStudioDrawer();
+    this.bindComparisonDrawer();
     this.bindSearchModal();
     this.handleRoute();
 
@@ -7903,10 +8839,35 @@ class RodeApp {
 
     // Mobile menu toggle
     const mobileToggle = document.getElementById("mobile-menu-toggle");
-    if (mobileToggle) {
-      mobileToggle.addEventListener("click", () => {
-        const nav = document.querySelector(".nav-links");
-        if (nav) nav.classList.toggle("mobile-open");
+    const navLinks = document.querySelector(".nav-links");
+    if (mobileToggle && navLinks) {
+      mobileToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = navLinks.classList.toggle("mobile-open");
+        const icon = mobileToggle.querySelector("i");
+        if (icon) {
+          icon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+        }
+      });
+
+      // Close mobile menu when clicking any nav link
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("mobile-open");
+          const icon = mobileToggle.querySelector("i");
+          if (icon) icon.className = "fa-solid fa-bars";
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
+          if (navLinks.classList.contains("mobile-open")) {
+            navLinks.classList.remove("mobile-open");
+            const icon = mobileToggle.querySelector("i");
+            if (icon) icon.className = "fa-solid fa-bars";
+          }
+        }
       });
     }
   }
@@ -8387,6 +9348,28 @@ class RodeApp {
       });
     }
 
+    // Mobile/Tablet Filter Drawer Toggle
+    const filterToggleBtn = document.getElementById("shop-filter-toggle-btn");
+    const filterCloseBtn = document.getElementById("close-filter-drawer-btn");
+    const filterApplyBtn = document.getElementById("apply-filters-btn");
+    const sidebarDrawer = document.getElementById("shop-sidebar-drawer");
+    const filterBackdrop = document.getElementById("filter-drawer-backdrop");
+
+    const openFilterDrawer = () => {
+      if (sidebarDrawer) sidebarDrawer.classList.add("filter-drawer-open");
+      if (filterBackdrop) filterBackdrop.classList.remove("hidden");
+    };
+
+    const closeFilterDrawer = () => {
+      if (sidebarDrawer) sidebarDrawer.classList.remove("filter-drawer-open");
+      if (filterBackdrop) filterBackdrop.classList.add("hidden");
+    };
+
+    if (filterToggleBtn) filterToggleBtn.addEventListener("click", openFilterDrawer);
+    if (filterCloseBtn) filterCloseBtn.addEventListener("click", closeFilterDrawer);
+    if (filterApplyBtn) filterApplyBtn.addEventListener("click", closeFilterDrawer);
+    if (filterBackdrop) filterBackdrop.addEventListener("click", closeFilterDrawer);
+
     // Reset buttons
     const resetBtn = document.getElementById("reset-filters-btn");
     const clearAllBtn = document.getElementById("clear-all-filters-btn");
@@ -8471,6 +9454,21 @@ class RodeApp {
     // Render Count
     const countLabel = document.getElementById("products-count-label");
     if (countLabel) countLabel.innerHTML = `Showing <strong>${prods.length}</strong> gear systems`;
+
+    // Active filters count for mobile/tab badge
+    let activeFilterCount = 0;
+    if (f.search) activeFilterCount++;
+    if (!f.categories.includes("all")) activeFilterCount += f.categories.length;
+    if (f.connectivity.length) activeFilterCount += f.connectivity.length;
+    if (f.archetypes.length) activeFilterCount += f.archetypes.length;
+    if (f.maxPrice < 1000) activeFilterCount++;
+    if (f.features.length) activeFilterCount += f.features.length;
+
+    const filterBadge = document.getElementById("mobile-filter-count-badge");
+    if (filterBadge) {
+      filterBadge.textContent = activeFilterCount;
+      filterBadge.classList.toggle("hidden", activeFilterCount === 0);
+    }
 
     // Render Grid
     const grid = document.getElementById("shop-products-grid");
@@ -8889,6 +9887,7 @@ class RodeApp {
     const toggleBtn = document.getElementById("global-audio-toggle");
     const drawer = document.getElementById("audio-studio-drawer");
     const closeBtn = document.getElementById("close-studio-drawer");
+    const closeMobileBtn = document.getElementById("close-studio-drawer-mobile");
     const playBtn = document.getElementById("play-sample-btn");
 
     if (toggleBtn && drawer) {
@@ -8896,6 +9895,9 @@ class RodeApp {
     }
     if (closeBtn && drawer) {
       closeBtn.addEventListener("click", () => drawer.classList.add("collapsed"));
+    }
+    if (closeMobileBtn && drawer) {
+      closeMobileBtn.addEventListener("click", () => drawer.classList.add("collapsed"));
     }
 
     if (playBtn) {
@@ -8917,6 +9919,16 @@ class RodeApp {
   }
 
   // ================= COMPARISON FLOAT DRAWER =================
+  bindComparisonDrawer() {
+    const closeBtn = document.getElementById("close-compare-drawer-btn");
+    const drawer = document.getElementById("comparison-drawer");
+    if (closeBtn && drawer) {
+      closeBtn.addEventListener("click", () => {
+        drawer.classList.add("closed");
+      });
+    }
+  }
+
   renderComparisonDrawer() {
     const list = store.getCompareList();
     const countBadge = document.getElementById("compare-badge");
@@ -8932,6 +9944,9 @@ class RodeApp {
 
     if (floatDrawer) {
       floatDrawer.classList.toggle("collapsed", list.length === 0);
+      if (list.length > 0) {
+        floatDrawer.classList.remove("closed");
+      }
     }
 
     if (floatItems) {
@@ -9024,6 +10039,13 @@ class RodeApp {
       window.showToast(res.message, "error");
     } else {
       window.showToast(res.added ? "Added to Shootout Comparison" : "Removed from Shootout");
+      if (res.added) {
+        const floatDrawer = document.getElementById("comparison-drawer");
+        if (floatDrawer) {
+          floatDrawer.classList.remove("closed");
+          floatDrawer.classList.remove("collapsed");
+        }
+      }
     }
   }
 
